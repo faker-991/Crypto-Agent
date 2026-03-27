@@ -1,0 +1,2469 @@
+{
+  "symbol": "ETH",
+  "market_type": "spot",
+  "technical_view": {
+    "1d": {
+      "trend_regime": "downtrend",
+      "support_levels": [
+        1747.8
+      ],
+      "resistance_levels": [
+        3447.44
+      ],
+      "breakout_signal": false,
+      "drawdown_state": "deep-drawdown",
+      "conclusion": "downtrend on this timeframe with support near 1747.80 and resistance near 3447.44.",
+      "candles": [
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1764028800000,
+          "open": 2953.38,
+          "high": 2980.82,
+          "low": 2857.32,
+          "close": 2959.36,
+          "volume": 427686.4528
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1764115200000,
+          "open": 2959.36,
+          "high": 3045.0,
+          "low": 2888.69,
+          "close": 3026.56,
+          "volume": 364535.326
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1764201600000,
+          "open": 3026.56,
+          "high": 3071.37,
+          "low": 2985.78,
+          "close": 3015.23,
+          "volume": 274980.3955
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1764288000000,
+          "open": 3015.23,
+          "high": 3099.0,
+          "low": 2994.36,
+          "close": 3031.15,
+          "volume": 346616.0275
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1764374400000,
+          "open": 3031.14,
+          "high": 3052.64,
+          "low": 2961.91,
+          "close": 2989.16,
+          "volume": 217904.1303
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1764460800000,
+          "open": 2989.17,
+          "high": 3053.02,
+          "low": 2975.3,
+          "close": 2991.26,
+          "volume": 182722.4253
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1764547200000,
+          "open": 2991.25,
+          "high": 2999.47,
+          "low": 2716.04,
+          "close": 2799.07,
+          "volume": 849002.9909
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1764633600000,
+          "open": 2799.07,
+          "high": 3033.76,
+          "low": 2782.19,
+          "close": 2996.07,
+          "volume": 523707.3586
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1764720000000,
+          "open": 2996.07,
+          "high": 3214.99,
+          "low": 2985.58,
+          "close": 3188.36,
+          "volume": 553669.8146
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1764806400000,
+          "open": 3188.39,
+          "high": 3240.35,
+          "low": 3066.37,
+          "close": 3133.26,
+          "volume": 486698.3987
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1764892800000,
+          "open": 3133.26,
+          "high": 3193.33,
+          "low": 2983.08,
+          "close": 3021.78,
+          "volume": 530382.8986
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1764979200000,
+          "open": 3021.77,
+          "high": 3069.0,
+          "low": 3012.58,
+          "close": 3038.06,
+          "volume": 159721.2488
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1765065600000,
+          "open": 3038.06,
+          "high": 3150.0,
+          "low": 2907.52,
+          "close": 3059.85,
+          "volume": 391129.675
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1765152000000,
+          "open": 3059.86,
+          "high": 3180.51,
+          "low": 3040.87,
+          "close": 3124.16,
+          "volume": 452820.2207
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1765238400000,
+          "open": 3124.16,
+          "high": 3397.85,
+          "low": 3090.8,
+          "close": 3318.04,
+          "volume": 603859.9458
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1765324800000,
+          "open": 3318.04,
+          "high": 3447.44,
+          "low": 3288.1,
+          "close": 3324.14,
+          "volume": 539585.4535
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1765411200000,
+          "open": 3324.14,
+          "high": 3327.37,
+          "low": 3145.28,
+          "close": 3237.39,
+          "volume": 504114.2391
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1765497600000,
+          "open": 3237.38,
+          "high": 3265.5,
+          "low": 3045.31,
+          "close": 3084.86,
+          "volume": 435686.4435
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1765584000000,
+          "open": 3084.86,
+          "high": 3135.68,
+          "low": 3078.6,
+          "close": 3114.64,
+          "volume": 136465.7567
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1765670400000,
+          "open": 3114.64,
+          "high": 3129.54,
+          "low": 3024.44,
+          "close": 3063.5,
+          "volume": 279058.3545
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1765756800000,
+          "open": 3063.49,
+          "high": 3177.5,
+          "low": 2894.57,
+          "close": 2964.85,
+          "volume": 520509.9555
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1765843200000,
+          "open": 2964.85,
+          "high": 2981.87,
+          "low": 2876.0,
+          "close": 2962.3,
+          "volume": 378293.1159
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1765929600000,
+          "open": 2962.3,
+          "high": 3030.92,
+          "low": 2791.02,
+          "close": 2833.49,
+          "volume": 497630.4162
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1766016000000,
+          "open": 2833.5,
+          "high": 2997.4,
+          "low": 2775.19,
+          "close": 2828.57,
+          "volume": 595253.7997
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1766102400000,
+          "open": 2828.56,
+          "high": 3020.0,
+          "low": 2808.63,
+          "close": 2979.5,
+          "volume": 531702.5439
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1766188800000,
+          "open": 2979.49,
+          "high": 2994.41,
+          "low": 2964.17,
+          "close": 2977.93,
+          "volume": 91783.7734
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1766275200000,
+          "open": 2977.93,
+          "high": 3013.4,
+          "low": 2944.0,
+          "close": 3002.02,
+          "volume": 162244.8067
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1766361600000,
+          "open": 3002.03,
+          "high": 3077.39,
+          "low": 2963.43,
+          "close": 3009.49,
+          "volume": 298443.5633
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1766448000000,
+          "open": 3009.48,
+          "high": 3035.79,
+          "low": 2900.93,
+          "close": 2965.02,
+          "volume": 386465.747
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1766534400000,
+          "open": 2965.03,
+          "high": 2978.15,
+          "low": 2888.7,
+          "close": 2947.47,
+          "volume": 197035.5598
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1766620800000,
+          "open": 2947.48,
+          "high": 2971.46,
+          "low": 2891.2,
+          "close": 2903.95,
+          "volume": 188721.2981
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1766707200000,
+          "open": 2903.9,
+          "high": 2994.38,
+          "low": 2894.26,
+          "close": 2927.99,
+          "volume": 314830.9989
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1766793600000,
+          "open": 2928.0,
+          "high": 2960.89,
+          "low": 2917.13,
+          "close": 2949.05,
+          "volume": 95040.3956
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1766880000000,
+          "open": 2949.05,
+          "high": 2961.23,
+          "low": 2924.54,
+          "close": 2950.91,
+          "volume": 128834.139
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1766966400000,
+          "open": 2950.91,
+          "high": 3057.78,
+          "low": 2910.25,
+          "close": 2937.9,
+          "volume": 485959.1824
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1767052800000,
+          "open": 2937.91,
+          "high": 3009.8,
+          "low": 2919.44,
+          "close": 2973.69,
+          "volume": 286583.2879
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1767139200000,
+          "open": 2973.69,
+          "high": 3028.08,
+          "low": 2958.91,
+          "close": 2971.64,
+          "volume": 233729.5887
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1767225600000,
+          "open": 2971.65,
+          "high": 3010.0,
+          "low": 2971.15,
+          "close": 3004.19,
+          "volume": 136088.5207
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1767312000000,
+          "open": 3004.19,
+          "high": 3150.01,
+          "low": 2992.49,
+          "close": 3125.45,
+          "volume": 369891.2449
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1767398400000,
+          "open": 3125.46,
+          "high": 3136.71,
+          "low": 3076.0,
+          "close": 3127.11,
+          "volume": 134405.2258
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1767484800000,
+          "open": 3127.11,
+          "high": 3167.22,
+          "low": 3118.75,
+          "close": 3144.7,
+          "volume": 181576.0686
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1767571200000,
+          "open": 3144.71,
+          "high": 3265.66,
+          "low": 3135.02,
+          "close": 3224.99,
+          "volume": 382446.6618
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1767657600000,
+          "open": 3224.99,
+          "high": 3308.86,
+          "low": 3183.27,
+          "close": 3296.84,
+          "volume": 412503.5066
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1767744000000,
+          "open": 3296.83,
+          "high": 3296.84,
+          "low": 3125.42,
+          "close": 3168.72,
+          "volume": 321350.1225
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1767830400000,
+          "open": 3168.72,
+          "high": 3184.39,
+          "low": 3054.65,
+          "close": 3106.65,
+          "volume": 343616.1005
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1767916800000,
+          "open": 3106.66,
+          "high": 3148.41,
+          "low": 3058.69,
+          "close": 3088.4,
+          "volume": 274587.4533
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1768003200000,
+          "open": 3088.4,
+          "high": 3104.12,
+          "low": 3077.99,
+          "close": 3086.72,
+          "volume": 82341.0546
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1768089600000,
+          "open": 3086.72,
+          "high": 3147.27,
+          "low": 3084.46,
+          "close": 3123.45,
+          "volume": 149381.2965
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1768176000000,
+          "open": 3123.46,
+          "high": 3171.49,
+          "low": 3065.55,
+          "close": 3095.75,
+          "volume": 297373.4681
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1768262400000,
+          "open": 3095.75,
+          "high": 3367.79,
+          "low": 3091.96,
+          "close": 3325.82,
+          "volume": 457782.2816
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1768348800000,
+          "open": 3325.83,
+          "high": 3402.89,
+          "low": 3280.48,
+          "close": 3354.92,
+          "volume": 503440.0759
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1768435200000,
+          "open": 3354.92,
+          "high": 3384.19,
+          "low": 3273.72,
+          "close": 3318.69,
+          "volume": 389993.836
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1768521600000,
+          "open": 3318.7,
+          "high": 3326.79,
+          "low": 3253.01,
+          "close": 3296.28,
+          "volume": 223921.7876
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1768608000000,
+          "open": 3296.28,
+          "high": 3330.26,
+          "low": 3283.96,
+          "close": 3310.56,
+          "volume": 124325.0303
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1768694400000,
+          "open": 3310.56,
+          "high": 3368.82,
+          "low": 3278.86,
+          "close": 3284.03,
+          "volume": 173354.3026
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1768780800000,
+          "open": 3284.04,
+          "high": 3284.58,
+          "low": 3165.38,
+          "close": 3189.55,
+          "volume": 442540.5596
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1768867200000,
+          "open": 3189.56,
+          "high": 3200.5,
+          "low": 2920.0,
+          "close": 2939.88,
+          "volume": 518166.4787
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1768953600000,
+          "open": 2939.88,
+          "high": 3069.07,
+          "low": 2866.11,
+          "close": 2982.27,
+          "volume": 577800.2481
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1769040000000,
+          "open": 2982.28,
+          "high": 3038.33,
+          "low": 2906.02,
+          "close": 2952.69,
+          "volume": 291660.7349
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1769126400000,
+          "open": 2952.7,
+          "high": 3019.26,
+          "low": 2892.4,
+          "close": 2956.41,
+          "volume": 318415.3317
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1769212800000,
+          "open": 2956.41,
+          "high": 2970.41,
+          "low": 2943.84,
+          "close": 2953.22,
+          "volume": 92082.9039
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1769299200000,
+          "open": 2953.23,
+          "high": 2960.29,
+          "low": 2787.0,
+          "close": 2816.89,
+          "volume": 380186.5326
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1769385600000,
+          "open": 2816.9,
+          "high": 2951.21,
+          "low": 2812.37,
+          "close": 2930.35,
+          "volume": 485169.3372
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1769472000000,
+          "open": 2930.35,
+          "high": 3035.08,
+          "low": 2899.77,
+          "close": 3026.77,
+          "volume": 478792.3988
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1769558400000,
+          "open": 3026.77,
+          "high": 3045.78,
+          "low": 2983.67,
+          "close": 3010.78,
+          "volume": 296607.6549
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1769644800000,
+          "open": 3010.78,
+          "high": 3013.5,
+          "low": 2754.53,
+          "close": 2822.59,
+          "volume": 561288.5979
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1769731200000,
+          "open": 2822.6,
+          "high": 2828.65,
+          "low": 2636.01,
+          "close": 2707.38,
+          "volume": 793279.6252
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1769817600000,
+          "open": 2707.37,
+          "high": 2714.64,
+          "low": 2250.0,
+          "close": 2451.95,
+          "volume": 1113097.7132
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1769904000000,
+          "open": 2451.96,
+          "high": 2475.98,
+          "low": 2222.0,
+          "close": 2270.15,
+          "volume": 1026573.9466
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1769990400000,
+          "open": 2270.16,
+          "high": 2396.62,
+          "low": 2157.14,
+          "close": 2347.02,
+          "volume": 1248535.2114
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1770076800000,
+          "open": 2347.01,
+          "high": 2359.88,
+          "low": 2110.0,
+          "close": 2233.72,
+          "volume": 1321099.3867
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1770163200000,
+          "open": 2233.72,
+          "high": 2295.74,
+          "low": 2076.68,
+          "close": 2148.26,
+          "volume": 1264743.43
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1770249600000,
+          "open": 2148.25,
+          "high": 2173.77,
+          "low": 1818.18,
+          "close": 1826.83,
+          "volume": 1952286.6951
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1770336000000,
+          "open": 1826.83,
+          "high": 2093.94,
+          "low": 1747.8,
+          "close": 2063.38,
+          "volume": 2102311.5573
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1770422400000,
+          "open": 2063.37,
+          "high": 2121.7,
+          "low": 1994.57,
+          "close": 2087.08,
+          "volume": 1142616.4487
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1770508800000,
+          "open": 2087.08,
+          "high": 2152.03,
+          "low": 2064.1,
+          "close": 2089.74,
+          "volume": 482837.2515
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1770595200000,
+          "open": 2089.73,
+          "high": 2147.73,
+          "low": 2008.62,
+          "close": 2105.02,
+          "volume": 625378.5569
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1770681600000,
+          "open": 2105.02,
+          "high": 2124.71,
+          "low": 1989.38,
+          "close": 2022.67,
+          "volume": 574321.6908
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1770768000000,
+          "open": 2022.67,
+          "high": 2032.31,
+          "low": 1903.19,
+          "close": 1941.18,
+          "volume": 529655.8177
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1770854400000,
+          "open": 1941.19,
+          "high": 2001.42,
+          "low": 1897.24,
+          "close": 1947.85,
+          "volume": 427567.1469
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1770940800000,
+          "open": 1947.85,
+          "high": 2073.68,
+          "low": 1924.72,
+          "close": 2048.72,
+          "volume": 425649.7698
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1771027200000,
+          "open": 2048.72,
+          "high": 2107.67,
+          "low": 2042.37,
+          "close": 2086.59,
+          "volume": 220677.2355
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1771113600000,
+          "open": 2086.59,
+          "high": 2103.32,
+          "low": 1928.88,
+          "close": 1966.58,
+          "volume": 834778.0952
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1771200000000,
+          "open": 1966.59,
+          "high": 2023.51,
+          "low": 1937.24,
+          "close": 1998.33,
+          "volume": 351347.9433
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1771286400000,
+          "open": 1998.34,
+          "high": 2015.33,
+          "low": 1941.66,
+          "close": 1991.66,
+          "volume": 406246.9427
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1771372800000,
+          "open": 1991.67,
+          "high": 2039.05,
+          "low": 1923.78,
+          "close": 1955.91,
+          "volume": 393639.0086
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1771459200000,
+          "open": 1955.9,
+          "high": 1987.55,
+          "low": 1907.0,
+          "close": 1949.08,
+          "volume": 300257.0733
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1771545600000,
+          "open": 1949.08,
+          "high": 1981.18,
+          "low": 1922.97,
+          "close": 1968.88,
+          "volume": 386253.5557
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1771632000000,
+          "open": 1968.88,
+          "high": 1995.56,
+          "low": 1955.62,
+          "close": 1973.35,
+          "volume": 179173.8456
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1771718400000,
+          "open": 1973.35,
+          "high": 1983.13,
+          "low": 1935.0,
+          "close": 1957.82,
+          "volume": 155325.6482
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1771804800000,
+          "open": 1957.82,
+          "high": 1958.33,
+          "low": 1837.13,
+          "close": 1856.3,
+          "volume": 547359.4869
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1771891200000,
+          "open": 1856.3,
+          "high": 1869.58,
+          "low": 1800.0,
+          "close": 1851.94,
+          "volume": 438064.0284
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1771977600000,
+          "open": 1851.95,
+          "high": 2148.39,
+          "low": 1846.74,
+          "close": 2057.48,
+          "volume": 682979.4378
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1772064000000,
+          "open": 2057.48,
+          "high": 2083.33,
+          "low": 1975.35,
+          "close": 2027.68,
+          "volume": 439783.3566
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1772150400000,
+          "open": 2027.68,
+          "high": 2063.52,
+          "low": 1887.0,
+          "close": 1929.84,
+          "volume": 428687.234
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1772236800000,
+          "open": 1929.84,
+          "high": 1984.99,
+          "low": 1835.36,
+          "close": 1964.51,
+          "volume": 461680.9835
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1772323200000,
+          "open": 1964.51,
+          "high": 2054.8,
+          "low": 1907.41,
+          "close": 1939.71,
+          "volume": 529196.8464
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1772409600000,
+          "open": 1939.71,
+          "high": 2090.0,
+          "low": 1920.0,
+          "close": 2027.35,
+          "volume": 577406.3749
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1772496000000,
+          "open": 2027.34,
+          "high": 2041.48,
+          "low": 1929.56,
+          "close": 1982.8,
+          "volume": 509329.8534
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1772582400000,
+          "open": 1982.81,
+          "high": 2199.0,
+          "low": 1945.08,
+          "close": 2127.28,
+          "volume": 737644.8152
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1772668800000,
+          "open": 2127.28,
+          "high": 2163.66,
+          "low": 2054.75,
+          "close": 2072.86,
+          "volume": 432157.8126
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1772755200000,
+          "open": 2072.86,
+          "high": 2093.33,
+          "low": 1955.95,
+          "close": 1978.68,
+          "volume": 411597.7569
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1772841600000,
+          "open": 1978.68,
+          "high": 1996.04,
+          "low": 1948.09,
+          "close": 1969.59,
+          "volume": 184459.82
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1772928000000,
+          "open": 1969.6,
+          "high": 1979.8,
+          "low": 1916.14,
+          "close": 1937.1,
+          "volume": 391189.7317
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1773014400000,
+          "open": 1937.11,
+          "high": 2053.52,
+          "low": 1929.65,
+          "close": 1992.98,
+          "volume": 550825.4883
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1773100800000,
+          "open": 1992.97,
+          "high": 2088.19,
+          "low": 1991.0,
+          "close": 2036.51,
+          "volume": 463411.8739
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1773187200000,
+          "open": 2036.5,
+          "high": 2085.58,
+          "low": 2007.17,
+          "close": 2051.97,
+          "volume": 350061.256
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1773273600000,
+          "open": 2051.97,
+          "high": 2095.0,
+          "low": 2017.59,
+          "close": 2073.52,
+          "volume": 400507.8132
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1773360000000,
+          "open": 2073.51,
+          "high": 2209.03,
+          "low": 2070.12,
+          "close": 2092.22,
+          "volume": 599657.0399
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1773446400000,
+          "open": 2092.21,
+          "high": 2106.09,
+          "low": 2061.6,
+          "close": 2096.16,
+          "volume": 152500.5822
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1773532800000,
+          "open": 2096.16,
+          "high": 2202.87,
+          "low": 2083.35,
+          "close": 2178.3,
+          "volume": 280825.9377
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1773619200000,
+          "open": 2178.29,
+          "high": 2386.02,
+          "low": 2164.73,
+          "close": 2352.97,
+          "volume": 845892.7756
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1773705600000,
+          "open": 2352.97,
+          "high": 2376.66,
+          "low": 2294.15,
+          "close": 2317.39,
+          "volume": 493831.1016
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1773792000000,
+          "open": 2317.38,
+          "high": 2350.0,
+          "low": 2153.21,
+          "close": 2203.39,
+          "volume": 488040.8887
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1773878400000,
+          "open": 2203.39,
+          "high": 2233.72,
+          "low": 2099.38,
+          "close": 2137.81,
+          "volume": 490791.679
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1773964800000,
+          "open": 2137.82,
+          "high": 2176.84,
+          "low": 2116.88,
+          "close": 2146.22,
+          "volume": 300156.1778
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1774051200000,
+          "open": 2146.21,
+          "high": 2168.27,
+          "low": 2070.78,
+          "close": 2084.87,
+          "volume": 132559.4646
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1774137600000,
+          "open": 2084.86,
+          "high": 2127.21,
+          "low": 2026.0,
+          "close": 2053.89,
+          "volume": 313070.5572
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1774224000000,
+          "open": 2053.9,
+          "high": 2198.57,
+          "low": 2023.04,
+          "close": 2152.03,
+          "volume": 614508.4369
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1d",
+          "open_time": 1774310400000,
+          "open": 2152.03,
+          "high": 2175.16,
+          "low": 2124.26,
+          "close": 2151.68,
+          "volume": 146243.4464
+        }
+      ]
+    },
+    "1w": {
+      "trend_regime": "range",
+      "support_levels": [
+        1385.05
+      ],
+      "resistance_levels": [
+        4956.78
+      ],
+      "breakout_signal": false,
+      "drawdown_state": "deep-drawdown",
+      "conclusion": "range on this timeframe with support near 1385.05 and resistance near 4956.78.",
+      "candles": [
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1702252800000,
+          "open": 2352.39,
+          "high": 2355.0,
+          "low": 2144.32,
+          "close": 2196.52,
+          "volume": 2589192.8571
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1702857600000,
+          "open": 2196.53,
+          "high": 2343.15,
+          "low": 2116.6,
+          "close": 2264.05,
+          "volume": 2772501.3746
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1703462400000,
+          "open": 2264.04,
+          "high": 2445.8,
+          "low": 2178.45,
+          "close": 2281.87,
+          "volume": 2701603.8776
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1704067200000,
+          "open": 2281.87,
+          "high": 2431.3,
+          "low": 2100.0,
+          "close": 2221.42,
+          "volume": 2729092.4564
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1704672000000,
+          "open": 2221.42,
+          "high": 2717.32,
+          "low": 2166.38,
+          "close": 2472.87,
+          "volume": 4583690.2125
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1705276800000,
+          "open": 2472.87,
+          "high": 2614.43,
+          "low": 2415.2,
+          "close": 2457.05,
+          "volume": 2198099.091
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1705881600000,
+          "open": 2457.06,
+          "high": 2466.1,
+          "low": 2168.07,
+          "close": 2256.9,
+          "volume": 2634723.4541
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1706486400000,
+          "open": 2256.9,
+          "high": 2391.98,
+          "low": 2233.8,
+          "close": 2289.79,
+          "volume": 1929216.6968
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1707091200000,
+          "open": 2289.79,
+          "high": 2539.63,
+          "low": 2269.11,
+          "close": 2507.21,
+          "volume": 2183844.0391
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1707696000000,
+          "open": 2507.22,
+          "high": 2895.0,
+          "low": 2472.0,
+          "close": 2881.2,
+          "volume": 2884670.9657
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1708300800000,
+          "open": 2881.2,
+          "high": 3122.0,
+          "low": 2856.93,
+          "close": 3112.59,
+          "volume": 3325600.6648
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1708905600000,
+          "open": 3112.6,
+          "high": 3522.81,
+          "low": 3036.59,
+          "close": 3487.81,
+          "volume": 3918303.8282
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1709510400000,
+          "open": 3487.8,
+          "high": 3993.75,
+          "low": 3200.0,
+          "close": 3878.47,
+          "volume": 4876443.9626
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1710115200000,
+          "open": 3878.47,
+          "high": 4093.92,
+          "low": 3412.0,
+          "close": 3644.71,
+          "volume": 4498501.7667
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1710720000000,
+          "open": 3644.7,
+          "high": 3645.02,
+          "low": 3056.56,
+          "close": 3454.98,
+          "volume": 4573957.9796
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1711324800000,
+          "open": 3454.99,
+          "high": 3678.86,
+          "low": 3420.12,
+          "close": 3645.29,
+          "volume": 2678017.3235
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1711929600000,
+          "open": 3645.29,
+          "high": 3645.95,
+          "low": 3202.79,
+          "close": 3454.2,
+          "volume": 2537269.621
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1712534400000,
+          "open": 3454.2,
+          "high": 3730.71,
+          "low": 2852.0,
+          "close": 3155.11,
+          "volume": 4111856.8835
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1713139200000,
+          "open": 3155.11,
+          "high": 3277.85,
+          "low": 2865.18,
+          "close": 3147.67,
+          "volume": 3082901.5669
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1713744000000,
+          "open": 3147.66,
+          "high": 3357.4,
+          "low": 3066.74,
+          "close": 3263.45,
+          "volume": 2171496.9307
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1714348800000,
+          "open": 3263.44,
+          "high": 3286.95,
+          "low": 2817.0,
+          "close": 3136.41,
+          "volume": 2745302.3283
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1714953600000,
+          "open": 3136.4,
+          "high": 3221.4,
+          "low": 2878.03,
+          "close": 2929.29,
+          "volume": 1733118.1611
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1715558400000,
+          "open": 2929.3,
+          "high": 3146.98,
+          "low": 2862.0,
+          "close": 3071.19,
+          "volume": 2006314.8675
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1716163200000,
+          "open": 3071.2,
+          "high": 3949.29,
+          "low": 3047.67,
+          "close": 3826.47,
+          "volume": 4432688.1628
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1716768000000,
+          "open": 3826.47,
+          "high": 3977.0,
+          "low": 3702.58,
+          "close": 3780.91,
+          "volume": 2008150.8132
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1717372800000,
+          "open": 3780.92,
+          "high": 3887.47,
+          "low": 3600.0,
+          "close": 3706.4,
+          "volume": 1598380.5436
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1717977600000,
+          "open": 3706.4,
+          "high": 3713.67,
+          "low": 3362.26,
+          "close": 3624.41,
+          "volume": 2002012.3791
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1718582400000,
+          "open": 3624.41,
+          "high": 3638.37,
+          "low": 3355.0,
+          "close": 3420.91,
+          "volume": 2029677.9377
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1719187200000,
+          "open": 3420.91,
+          "high": 3487.7,
+          "low": 3240.0,
+          "close": 3438.16,
+          "volume": 1642583.3763
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1719792000000,
+          "open": 3438.16,
+          "high": 3524.94,
+          "low": 2810.0,
+          "close": 2931.0,
+          "volume": 2404392.0416
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1720396800000,
+          "open": 2930.99,
+          "high": 3268.72,
+          "low": 2822.8,
+          "close": 3245.08,
+          "volume": 1811337.9883
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1721001600000,
+          "open": 3245.2,
+          "high": 3547.0,
+          "low": 3233.22,
+          "close": 3535.92,
+          "volume": 1896101.9183
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1721606400000,
+          "open": 3535.93,
+          "high": 3562.82,
+          "low": 3087.53,
+          "close": 3270.16,
+          "volume": 2073949.1765
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1722211200000,
+          "open": 3270.16,
+          "high": 3396.77,
+          "low": 2630.0,
+          "close": 2688.92,
+          "volume": 2315109.2317
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1722816000000,
+          "open": 2688.91,
+          "high": 2724.1,
+          "low": 2111.0,
+          "close": 2555.38,
+          "volume": 5404357.4398
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1723420800000,
+          "open": 2555.38,
+          "high": 2780.0,
+          "low": 2510.05,
+          "close": 2612.15,
+          "volume": 2038545.3388
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1724025600000,
+          "open": 2612.15,
+          "high": 2820.0,
+          "low": 2536.22,
+          "close": 2746.13,
+          "volume": 1770389.3741
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1724630400000,
+          "open": 2746.12,
+          "high": 2762.0,
+          "low": 2392.96,
+          "close": 2425.72,
+          "volume": 1972091.5264
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1725235200000,
+          "open": 2425.71,
+          "high": 2564.83,
+          "low": 2150.55,
+          "close": 2297.3,
+          "volume": 2205410.4186
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1725840000000,
+          "open": 2297.3,
+          "high": 2464.82,
+          "low": 2272.8,
+          "close": 2316.1,
+          "volume": 1582774.647
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1726444800000,
+          "open": 2316.09,
+          "high": 2632.57,
+          "low": 2252.39,
+          "close": 2581.0,
+          "volume": 1934203.9178
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1727049600000,
+          "open": 2580.99,
+          "high": 2728.6,
+          "low": 2539.49,
+          "close": 2657.62,
+          "volume": 1700523.1697
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1727654400000,
+          "open": 2657.62,
+          "high": 2663.5,
+          "low": 2310.0,
+          "close": 2440.03,
+          "volume": 1866301.096
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1728259200000,
+          "open": 2440.02,
+          "high": 2521.0,
+          "low": 2330.66,
+          "close": 2468.91,
+          "volume": 1496864.6501
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1728864000000,
+          "open": 2468.92,
+          "high": 2759.0,
+          "low": 2443.39,
+          "close": 2746.91,
+          "volume": 1988901.4205
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1729468800000,
+          "open": 2746.91,
+          "high": 2769.48,
+          "low": 2382.59,
+          "close": 2507.8,
+          "volume": 2121027.5261
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1730073600000,
+          "open": 2507.8,
+          "high": 2722.3,
+          "low": 2411.0,
+          "close": 2457.73,
+          "volume": 2528794.7142
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1730678400000,
+          "open": 2457.73,
+          "high": 3248.52,
+          "low": 2357.59,
+          "close": 3183.21,
+          "volume": 4332044.1216
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1731283200000,
+          "open": 3183.2,
+          "high": 3442.5,
+          "low": 3014.5,
+          "close": 3076.0,
+          "volume": 4891858.4823
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1731888000000,
+          "open": 3075.99,
+          "high": 3497.51,
+          "low": 3029.41,
+          "close": 3361.2,
+          "volume": 4422697.3945
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1732492800000,
+          "open": 3361.21,
+          "high": 3746.8,
+          "low": 3252.0,
+          "close": 3707.61,
+          "volume": 4295514.8505
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1733097600000,
+          "open": 3707.61,
+          "high": 4087.73,
+          "low": 3500.0,
+          "close": 4004.15,
+          "volume": 4669905.3912
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1733702400000,
+          "open": 4004.15,
+          "high": 4006.17,
+          "low": 3509.0,
+          "close": 3959.09,
+          "volume": 3822903.4975
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1734307200000,
+          "open": 3959.09,
+          "high": 4107.8,
+          "low": 3101.9,
+          "close": 3281.83,
+          "volume": 5094815.4058
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1734912000000,
+          "open": 3281.83,
+          "high": 3547.95,
+          "low": 3216.97,
+          "close": 3356.48,
+          "volume": 2008743.4021
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1735516800000,
+          "open": 3356.48,
+          "high": 3675.25,
+          "low": 3305.0,
+          "close": 3635.99,
+          "volume": 1971470.8374
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1736121600000,
+          "open": 3636.0,
+          "high": 3744.83,
+          "low": 3158.0,
+          "close": 3267.3,
+          "volume": 2728455.8925
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1736726400000,
+          "open": 3267.3,
+          "high": 3525.72,
+          "low": 2920.0,
+          "close": 3215.12,
+          "volume": 4650735.5624
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1737331200000,
+          "open": 3215.2,
+          "high": 3453.69,
+          "low": 3142.78,
+          "close": 3232.61,
+          "volume": 3594143.0907
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1737936000000,
+          "open": 3232.61,
+          "high": 3437.31,
+          "low": 2750.71,
+          "close": 2869.68,
+          "volume": 3917894.0487
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1738540800000,
+          "open": 2869.68,
+          "high": 2921.0,
+          "low": 2125.01,
+          "close": 2627.18,
+          "volume": 6935945.7161
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1739145600000,
+          "open": 2627.18,
+          "high": 2795.45,
+          "low": 2546.92,
+          "close": 2661.41,
+          "volume": 2786533.3434
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1739750400000,
+          "open": 2661.41,
+          "high": 2857.34,
+          "low": 2605.44,
+          "close": 2819.69,
+          "volume": 3853924.8175
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1740355200000,
+          "open": 2819.7,
+          "high": 2839.95,
+          "low": 2076.26,
+          "close": 2518.11,
+          "volume": 6704218.924
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1740960000000,
+          "open": 2518.12,
+          "high": 2523.56,
+          "low": 1989.66,
+          "close": 2020.41,
+          "volume": 5364278.6674
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1741564800000,
+          "open": 2020.43,
+          "high": 2152.4,
+          "low": 1754.28,
+          "close": 1887.0,
+          "volume": 4688568.5488
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1742169600000,
+          "open": 1887.01,
+          "high": 2069.9,
+          "low": 1872.31,
+          "close": 2005.99,
+          "volume": 2463197.0745
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1742774400000,
+          "open": 2005.99,
+          "high": 2104.11,
+          "low": 1767.69,
+          "close": 1807.74,
+          "volume": 2960069.0978
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1743379200000,
+          "open": 1807.74,
+          "high": 1957.0,
+          "low": 1537.5,
+          "close": 1580.76,
+          "volume": 3964057.6385
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1743984000000,
+          "open": 1580.77,
+          "high": 1689.0,
+          "low": 1385.05,
+          "close": 1597.76,
+          "volume": 7601517.2827
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1744588800000,
+          "open": 1597.76,
+          "high": 1691.5,
+          "low": 1538.07,
+          "close": 1587.36,
+          "volume": 2882924.9212
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1745193600000,
+          "open": 1587.36,
+          "high": 1857.47,
+          "low": 1537.26,
+          "close": 1791.29,
+          "volume": 4456545.8725
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1745798400000,
+          "open": 1791.29,
+          "high": 1873.17,
+          "low": 1731.7,
+          "close": 1808.86,
+          "volume": 2941122.6775
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1746403200000,
+          "open": 1808.86,
+          "high": 2608.13,
+          "low": 1752.0,
+          "close": 2514.57,
+          "volume": 6134223.597
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1747008000000,
+          "open": 2514.58,
+          "high": 2738.5,
+          "low": 2323.21,
+          "close": 2497.78,
+          "volume": 5609427.8904
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1747612800000,
+          "open": 2497.78,
+          "high": 2734.23,
+          "low": 2348.38,
+          "close": 2551.22,
+          "volume": 5076059.3723
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1748217600000,
+          "open": 2551.22,
+          "high": 2788.0,
+          "low": 2468.56,
+          "close": 2539.21,
+          "volume": 4022669.1595
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1748822400000,
+          "open": 2539.2,
+          "high": 2679.88,
+          "low": 2381.49,
+          "close": 2509.83,
+          "volume": 3344811.759
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1749427200000,
+          "open": 2509.84,
+          "high": 2879.22,
+          "low": 2436.98,
+          "close": 2547.61,
+          "volume": 5090252.9755
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1750032000000,
+          "open": 2547.62,
+          "high": 2680.34,
+          "low": 2111.89,
+          "close": 2227.7,
+          "volume": 4122506.1539
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1750636800000,
+          "open": 2227.7,
+          "high": 2525.0,
+          "low": 2188.0,
+          "close": 2500.09,
+          "volume": 2961524.7848
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1751241600000,
+          "open": 2500.09,
+          "high": 2635.5,
+          "low": 2373.0,
+          "close": 2570.35,
+          "volume": 2819702.2414
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1751846400000,
+          "open": 2570.35,
+          "high": 3040.15,
+          "low": 2512.0,
+          "close": 2972.03,
+          "volume": 3937696.2647
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1752451200000,
+          "open": 2972.03,
+          "high": 3824.56,
+          "low": 2932.46,
+          "close": 3756.69,
+          "volume": 6187124.6691
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1753056000000,
+          "open": 3756.69,
+          "high": 3879.82,
+          "low": 3502.85,
+          "close": 3872.1,
+          "volume": 4861139.2263
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1753660800000,
+          "open": 3872.11,
+          "high": 3941.0,
+          "low": 3354.28,
+          "close": 3496.74,
+          "volume": 3821131.0731
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1754265600000,
+          "open": 3496.75,
+          "high": 4332.6,
+          "low": 3490.73,
+          "close": 4250.57,
+          "volume": 3859485.7789
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1754870400000,
+          "open": 4250.58,
+          "high": 4788.0,
+          "low": 4166.77,
+          "close": 4472.33,
+          "volume": 5480879.8797
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1755475200000,
+          "open": 4472.34,
+          "high": 4956.78,
+          "low": 4060.0,
+          "close": 4780.15,
+          "volume": 5387659.71698
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1756080000000,
+          "open": 4780.15,
+          "high": 4797.97,
+          "low": 4257.2,
+          "close": 4391.83,
+          "volume": 4346549.4528
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1756684800000,
+          "open": 4391.83,
+          "high": 4491.84,
+          "low": 4210.61,
+          "close": 4306.19,
+          "volume": 2982279.2676
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1757289600000,
+          "open": 4306.19,
+          "high": 4769.36,
+          "low": 4276.76,
+          "close": 4604.49,
+          "volume": 2909677.3399
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1757894400000,
+          "open": 4604.48,
+          "high": 4670.28,
+          "low": 4412.0,
+          "close": 4444.97,
+          "volume": 2084983.7991
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1758499200000,
+          "open": 4444.98,
+          "high": 4455.76,
+          "low": 3815.0,
+          "close": 4142.16,
+          "volume": 3296200.6113
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1759104000000,
+          "open": 4142.16,
+          "high": 4618.17,
+          "low": 4082.25,
+          "close": 4514.32,
+          "volume": 2997297.5318
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1759708800000,
+          "open": 4514.32,
+          "high": 4755.0,
+          "low": 3435.0,
+          "close": 4152.29,
+          "volume": 5107933.9309
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1760313600000,
+          "open": 4152.29,
+          "high": 4292.0,
+          "low": 3674.5,
+          "close": 3982.58,
+          "volume": 4345072.9585
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1760918400000,
+          "open": 3982.58,
+          "high": 4178.78,
+          "low": 3710.0,
+          "close": 4158.46,
+          "volume": 3081488.9408
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1761523200000,
+          "open": 4158.46,
+          "high": 4253.72,
+          "low": 3680.0,
+          "close": 3906.58,
+          "volume": 2825722.9881
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1762128000000,
+          "open": 3906.58,
+          "high": 3914.29,
+          "low": 3057.0,
+          "close": 3583.46,
+          "volume": 5260194.5621
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1762732800000,
+          "open": 3583.46,
+          "high": 3658.98,
+          "low": 3004.0,
+          "close": 3095.29,
+          "volume": 4560190.5842
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1763337600000,
+          "open": 3095.29,
+          "high": 3223.38,
+          "low": 2623.57,
+          "close": 2802.16,
+          "volume": 5034566.9119
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1763942400000,
+          "open": 2802.16,
+          "high": 3099.0,
+          "low": 2763.0,
+          "close": 2991.26,
+          "volume": 2529724.5125
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1764547200000,
+          "open": 2991.25,
+          "high": 3240.35,
+          "low": 2716.04,
+          "close": 3059.85,
+          "volume": 3494312.3852
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1765152000000,
+          "open": 3059.86,
+          "high": 3447.44,
+          "low": 3024.44,
+          "close": 3063.5,
+          "volume": 2951590.4138
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1765756800000,
+          "open": 3063.49,
+          "high": 3177.5,
+          "low": 2775.19,
+          "close": 3002.02,
+          "volume": 2777418.4113
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1766361600000,
+          "open": 3002.03,
+          "high": 3077.39,
+          "low": 2888.7,
+          "close": 2950.91,
+          "volume": 1609371.7017
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1766966400000,
+          "open": 2950.91,
+          "high": 3167.22,
+          "low": 2910.25,
+          "close": 3144.7,
+          "volume": 1828233.119
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1767571200000,
+          "open": 3144.71,
+          "high": 3308.86,
+          "low": 3054.65,
+          "close": 3123.45,
+          "volume": 1966226.1958
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1768176000000,
+          "open": 3123.46,
+          "high": 3402.89,
+          "low": 3065.55,
+          "close": 3284.03,
+          "volume": 2170190.7821
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1768780800000,
+          "open": 3284.04,
+          "high": 3284.58,
+          "low": 2787.0,
+          "close": 2816.89,
+          "volume": 2620852.7895
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1769385600000,
+          "open": 2816.9,
+          "high": 3045.78,
+          "low": 2222.0,
+          "close": 2270.15,
+          "volume": 4754809.2738
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1769990400000,
+          "open": 2270.16,
+          "high": 2396.62,
+          "low": 1747.8,
+          "close": 2089.74,
+          "volume": 9514429.9807
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1770595200000,
+          "open": 2089.73,
+          "high": 2147.73,
+          "low": 1897.24,
+          "close": 1966.58,
+          "volume": 3638028.3128
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1771200000000,
+          "open": 1966.59,
+          "high": 2039.05,
+          "low": 1907.0,
+          "close": 1957.82,
+          "volume": 2172244.0174
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1771804800000,
+          "open": 1957.82,
+          "high": 2148.39,
+          "low": 1800.0,
+          "close": 1939.71,
+          "volume": 3527751.3736
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1772409600000,
+          "open": 1939.71,
+          "high": 2199.0,
+          "low": 1916.14,
+          "close": 1937.1,
+          "volume": 3243786.1647
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1773014400000,
+          "open": 1937.11,
+          "high": 2209.03,
+          "low": 1929.65,
+          "close": 2178.3,
+          "volume": 2797789.9912
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1773619200000,
+          "open": 2178.29,
+          "high": 2386.02,
+          "low": 2026.0,
+          "close": 2053.89,
+          "volume": 3064342.6445
+        },
+        {
+          "symbol": "ETH",
+          "timeframe": "1w",
+          "open_time": 1774224000000,
+          "open": 2053.9,
+          "high": 2198.57,
+          "low": 2023.04,
+          "close": 2151.68,
+          "volume": 760751.8833
+        }
+      ]
+    }
+  },
+  "kline_analysis": {
+    "focus": [],
+    "horizon": null,
+    "timeframes": [
+      "1d",
+      "1w"
+    ],
+    "market_type": "spot",
+    "provenance": {
+      "1d": {
+        "market_type": "spot",
+        "source": "binance",
+        "endpoint_summary": {
+          "integration": "binance",
+          "endpoint": "klines",
+          "market_type": "spot",
+          "url": "https://api.binance.com/api/v3/klines",
+          "method": "GET"
+        },
+        "degraded_reason": null
+      },
+      "1w": {
+        "market_type": "spot",
+        "source": "binance",
+        "endpoint_summary": {
+          "integration": "binance",
+          "endpoint": "klines",
+          "market_type": "spot",
+          "url": "https://api.binance.com/api/v3/klines",
+          "method": "GET"
+        },
+        "degraded_reason": null
+      }
+    }
+  }
+}

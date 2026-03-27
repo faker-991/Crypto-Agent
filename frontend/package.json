@@ -1,0 +1,27 @@
+{
+  "name": "crypto-agent-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "lint": "eslint app components lib eslint.config.mjs --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "next": "15.3.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "lightweight-charts": "4.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.30",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "autoprefixer": "10.4.21",
+    "eslint": "9.29.0",
+    "eslint-config-next": "15.3.0",
+    "postcss": "8.5.6",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.8.3"
+  }
+}

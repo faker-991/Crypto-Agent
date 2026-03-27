@@ -1,0 +1,22 @@
+{
+  "assets": [
+    {
+      "symbol": "ETH",
+      "status": "core_watch",
+      "priority": 2,
+      "last_reviewed_at": "2026-03-23"
+    },
+    {
+      "symbol": "BNB",
+      "status": "watch",
+      "priority": 2,
+      "last_reviewed_at": "2026-03-24"
+    },
+    {
+      "symbol": "BTC",
+      "status": "watch",
+      "priority": 2,
+      "last_reviewed_at": "2026-03-24"
+    }
+  ]
+}

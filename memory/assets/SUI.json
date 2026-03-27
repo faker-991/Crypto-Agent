@@ -1,0 +1,78 @@
+{
+  "agent": "ResearchAgent",
+  "status": "insufficient",
+  "asset": "SUI",
+  "summary": "SUI is worth continued monitoring for a medium-term thesis.",
+  "bull_case": [
+    "SUI has enough narrative and ecosystem surface area for follow-up research.",
+    "SUI can be tracked through catalysts, tokenomics, and momentum changes."
+  ],
+  "bear_case": [
+    "SUI may fail to sustain attention if catalysts weaken.",
+    "SUI still requires deeper validation on execution and valuation."
+  ],
+  "risks": [
+    "token unlock pressure",
+    "narrative fatigue",
+    "execution miss on roadmap"
+  ],
+  "focus": [],
+  "horizon": null,
+  "market_context": null,
+  "protocol_context": null,
+  "evidence_sufficient": false,
+  "missing_information": [
+    "Web evidence unavailable.",
+    "Market data or protocol snapshot unavailable."
+  ],
+  "tool_calls": [
+    {
+      "round": 1,
+      "tool": "search_web",
+      "input": {
+        "query": "SUI crypto tokenomics roadmap catalysts risks"
+      },
+      "output": {
+        "status": "failed",
+        "result_count": 0
+      }
+    }
+  ],
+  "rounds_used": 2,
+  "fetched_sources": [],
+  "symbol": "SUI",
+  "market_type": "spot",
+  "technical_view": {
+    "4h": {
+      "trend_regime": "unavailable",
+      "support_levels": [],
+      "resistance_levels": [],
+      "breakout_signal": false,
+      "drawdown_state": "unavailable",
+      "conclusion": "Real-time Binance data unavailable for this timeframe.",
+      "candles": []
+    }
+  },
+  "kline_analysis": {
+    "focus": [],
+    "horizon": null,
+    "timeframes": [
+      "4h"
+    ],
+    "market_type": "spot",
+    "provenance": {
+      "4h": {
+        "market_type": "spot",
+        "source": "unavailable",
+        "endpoint_summary": {
+          "integration": "binance",
+          "endpoint": "klines",
+          "market_type": "spot",
+          "url": "https://api.binance.com/api/v3/klines",
+          "method": "GET"
+        },
+        "degraded_reason": "klines fetch failed: [Errno -3] Temporary failure in name resolution"
+      }
+    }
+  }
+}

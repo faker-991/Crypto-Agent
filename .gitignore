@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/tsconfig.tsbuildinfo
+
+# Environment files
+backend/.env
+frontend/.env.local
+frontend/.env*.local
+
+# Local runtime memory artifacts
+memory/conversations/
+memory/session/
+memory/traces/
+memory/reports/weekly/latest.md
+
+# OS / editor noise
+.DS_Store
+
+# Local workflow metadata
+.superpowers/

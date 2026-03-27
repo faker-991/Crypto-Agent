@@ -1,0 +1,7 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/memory/page": "/memory",
+  "/assets/[symbol]/page": "/assets/[symbol]",
+  "/traces/page": "/traces",
+  "/page": "/"
+}
