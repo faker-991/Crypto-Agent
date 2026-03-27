@@ -6,6 +6,7 @@ __pycache__/
 # Node / Next.js
 frontend/node_modules/
 frontend/.next/
+frontend/.next.stale*/
 frontend/tsconfig.tsbuildinfo
 
 # Environment files
@@ -18,6 +19,7 @@ memory/conversations/
 memory/session/
 memory/traces/
 memory/reports/weekly/latest.md
+backend/tmp-memory*/
 
 # OS / editor noise
 .DS_Store

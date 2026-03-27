@@ -1,6 +1,0 @@
-{
-  "/page": "app/page.js",
-  "/traces/page": "app/traces/page.js",
-  "/memory/page": "app/memory/page.js",
-  "/assets/[symbol]/page": "app/assets/[symbol]/page.js"
-}
