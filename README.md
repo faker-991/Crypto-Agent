@@ -1,209 +1,235 @@
 # Crypto Agent
 
-Personal crypto research workspace with:
+一个本地优先的加密研究工作台，包含：
 
-- `FastAPI` backend
-- `Next.js` frontend
-- local markdown/json memory
-- planner-orchestrated agent workflow
-- Binance public market data adapter
-- paper trading ledger
-- trace logging and trace viewer
+- `FastAPI` 后端
+- `Next.js` 前端
+- 基于文件的记忆系统
+- `Planner -> Executor -> Agents` 执行链路
+- 币安公开行情接口接入
+- 自选列表与模拟交易台账
+- 可读化 trace 查看页
 
-## Current Scope
+项目目标不是做一个大而全的平台，而是提供一套可运行、可观察、可继续演化的 agent research skeleton。
 
-Implemented today:
+## 当前能力
 
-- watchlist add/remove
-- paper trading portfolio and order logging
-- asset detail page with Binance-backed kline chart, MAs, support, resistance
-- planner flow with `ContextBuilder`, `Planner`, `Executor`, and `SummaryAgent`
-- single-task research and kline execution
-- multi-task research + kline + summary execution
-- clarify-first handling for missing asset or underspecified follow-ups
-- persistent multi-conversation chat history backed by local files
-- post-execution LLM answer generation for conversational replies
-- weekly report generation job
-- trace logging and `/traces` UI
-- CoinGecko / DefiLlama research context ingestion for part of research flows
+- 多会话聊天页，支持 planner 编排后的研究问答
+- 资产实时工作台：`/assets/[symbol]`
+- 币安现货/合约行情快照与 K 线
+- 周期切换：`1m / 5m / 15m / 1h`
+- 顶部默认前 20 资产选择器
+- 只搜索币安可交易资产
+- 本地 watchlist 持久化
+- 本地 paper portfolio / paper orders 台账
+- 文件型 memory：profile、asset thesis、journal、session、conversation、trace
+- `/traces` 可读执行流程页
+- `ResearchAgent` loop 过程展示
+- 可选的 OpenAI-compatible answer generation
 
-Still intentionally lightweight:
+## 当前限制
 
-- no database
-- no auth
-- no real trade execution
-- no LangGraph orchestration yet
-- planner decomposition is deterministic in MVP
-- Binance skills runtime is not wired in yet; the project currently uses public HTTP adapters where possible
+- 没有数据库，状态主要落在 `memory/`
+- 没有认证
+- 没有真实下单
+- `ResearchAgent` 已有 loop，其他 agent 仍偏 deterministic worker
+- 默认资产前 20 目前是内置名单，不是实时市值榜
+- 外部研究数据链路依赖当前网络环境
 
-## Repo Layout
+## 项目结构
 
 ```text
-backend/   FastAPI app, orchestrator, agents, services, tests
-frontend/  Next.js app UI
-memory/    local md/json memory, assets, reports, traces
-scripts/   local dev and verification helpers
+backend/   FastAPI、orchestrator、agents、services、tests
+frontend/  Next.js 界面
+memory/    本地记忆、会话、trace、资产 thesis、台账
+docs/      设计和实现文档
+scripts/   本地开发与验证脚本
 ```
 
-## Prerequisites
+## 核心页面
 
-- Python 3.12+
-- Node.js 20+
-- npm
+- `/`
+  聊天首页。左侧是会话列表，右侧是大聊天区，整体更接近 GPT 的使用方式。
 
-## Backend Setup
+- `/assets/BTC`
+  单资产实时工作台。支持顶部切换资产、分钟级别图表、实时价格、右侧行情信息。
+
+- `/traces`
+  执行轨迹浏览页。支持查看 planner 决策、agent 实际调用、研究 loop 轮次和最终结论。
+
+## 技术栈
+
+- 后端：`FastAPI`、`Pydantic v2`、`httpx`、`APScheduler`、`pytest`
+- 前端：`Next.js 15`、`React 19`、`TypeScript`、`Tailwind CSS`
+- 图表：`lightweight-charts`
+- 行情源：币安公开接口
+
+## 快速启动
+
+### 1. 启动后端
 
 ```bash
 cd backend
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-```
-
-Optional environment:
-
-```bash
 cp .env.example .env
-```
-
-Start backend:
-
-```bash
-cd backend
-source .venv/bin/activate
 uvicorn app.main:app --reload --app-dir .
 ```
 
-Backend base URL:
+后端地址：
 
 ```text
 http://127.0.0.1:8000
 ```
 
-## Frontend Setup
+### 2. 启动前端
 
 ```bash
 cd frontend
 npm install
 cp .env.local.example .env.local
-```
-
-Start frontend:
-
-```bash
-cd frontend
 npm run dev
 ```
 
-Frontend base URL:
+前端地址：
 
 ```text
 http://127.0.0.1:3000
 ```
 
-## One-Command Dev
+### 3. 一条命令启动
 
-If your backend virtualenv already exists and frontend deps are already installed:
+如果后端虚拟环境和前端依赖已经装好，可以直接运行：
 
 ```bash
 ./scripts/dev.sh
 ```
 
-This opens:
+这个脚本会同时拉起：
 
-- backend on `127.0.0.1:8000`
-- frontend on `127.0.0.1:3000`
+- 后端 `127.0.0.1:8000`
+- 前端 `127.0.0.1:3000`
 
-Stop both with `Ctrl+C`.
+## 环境变量
 
-## Verification
+### 后端
 
-Run the full local verification bundle:
+`backend/.env.example` 当前支持：
+
+```text
+OPENAI_API_KEY=
+OPENAI_MODEL=
+OPENAI_BASE_URL=
+OPENAI_TIMEOUT=
+ROUTER_LLM_MODEL=
+ROUTER_LLM_API_KEY=
+ROUTER_LLM_BASE_URL=
+ROUTER_LLM_TIMEOUT=
+```
+
+说明：
+
+- 不配也能跑 planner、research、kline、trace
+- 配了以后，可以在结构化执行结果之外再生成更自然的回答
+
+### 前端
+
+`frontend/.env.local.example`
+
+```text
+NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000
+```
+
+## 验证命令
+
+一键验证：
 
 ```bash
 ./scripts/test.sh
 ```
 
-This runs:
+它会运行：
 
-- backend tests
-- frontend lint
-- frontend production build
+- `pytest backend/tests -q`
+- `npm run lint`
+- `npm run build`
 
-## Planning And Answer Layers
+## API 概览
 
-Planner execution works without any LLM. The MVP planner is deterministic and produces:
+主要接口包括：
 
-- `execute`
-- `clarify`
-- `failed`
+- `GET /api/health`
+- `GET /api/conversations`
+- `POST /api/conversations`
+- `POST /api/conversations/{conversation_id}/messages`
+- `GET /api/assets/discovery/top`
+- `GET /api/assets/discovery/search?q=btc`
+- `GET /api/assets/{symbol}/live?market=spot&timeframe=1m`
+- `GET /api/traces`
+- `GET /api/traces/{trace_id}`
+- `GET /api/watchlist`
+- `POST /api/watchlist`
 
-The same backend can optionally use an OpenAI-compatible answer-generation layer after structured execution. To enable that layer, set backend env vars:
+## Memory 设计
 
-```text
-OPENAI_API_KEY=...
-OPENAI_MODEL=...
-```
+这个项目的 memory 是文件型分层结构，不是数据库，也不是完整的向量检索系统。
 
-Optional:
+主要目录：
 
-```text
-OPENAI_BASE_URL=...
-```
+- `memory/profile.json`
+  用户偏好和长期设定
 
-Behavior:
+- `memory/MEMORY.md`
+  长期文字记忆
 
-- the planner first builds structured context and tasks
-- executor runs research and/or kline tasks
-- summary agent produces a final structured result
-- answer generation can upgrade the structured result into a more natural reply
-- if answer generation fails, the UI still shows the structured planner result
+- `memory/assets/*.md` / `memory/assets/*.json`
+  资产 thesis 和结构化元数据
 
-## Key Pages
+- `memory/watchlist.json`
+  自选列表
 
-- `/` dashboard
-- `/assets/BTC` asset detail
-- `/memory` long-term memory
-- `/traces` workflow trace browser
+- `memory/conversations/*.json`
+  多会话聊天记录
 
-## Trace Logs
+- `memory/session/current_session.json`
+  当前会话短期状态
 
-All planner runs write json traces under:
+- `memory/traces/*.json`
+  planner 与 agent 执行轨迹
 
-```text
-memory/traces/
-```
+## 执行链路
 
-The UI trace browser reads those same files through backend APIs. Historical router-era traces remain readable in the trace browser, but new writes use planner-era fields.
+当前主链路大致是：
 
-## Memory Architecture
+1. 用户消息进入 conversation service
+2. planner 根据 query、session state、recent summaries 产出任务
+3. executor 顺序执行 `ResearchAgent`、`KlineAgent`、`SummaryAgent`
+4. 结果写入 trace 和 conversation
+5. 如果配置了 LLM answer layer，再把结构化结果转换成自然语言回复
 
-The project uses a layered file-backed memory model under `memory/`:
+其中：
 
-- short-term memory: `memory/session/current_session.json`
-- conversation memory: `memory/conversations/index.json`, `memory/conversations/*.json`
-- long-term memory: `memory/MEMORY.md`, `memory/profile.json`, `memory/assets/*.md`, `memory/assets/*.json`
-- episodic memory: `memory/journal/*.md`
-- execution traces: `memory/traces/*.json`
+- `ResearchAgent` 已支持有限轮次 loop，并在 `/traces` 中展示每轮观察、决策、动作和停止原因
+- `KlineAgent` 主要负责时间周期行情和指标摘要
+- `SummaryAgent` 负责合并研究结论和技术面结果
 
-Backend services split responsibilities across:
+## 开发说明
 
-- `MemoryService` for compatibility-facing reads
-- `ProfileMemoryService` for user preferences
-- `AssetMemoryService` for thesis markdown and asset metadata
-- `JournalMemoryService` for human-readable review notes
-- `ContextAssemblyService` for planner, research, and kline context payload assembly
+- 前端 `Memory` 页面已经移除，但后端 memory 架构仍保留
+- trace 页面已改成“最终结论 + 可读时间线 + Raw Trace”
+- 资产页已改成实时工作台，不再展示旧的 `Research note` 和 `Other timeframes`
+- 当前默认数据源以币安为主，适合本地开发和功能迭代
 
-The `/memory` page surfaces these layers through read-only APIs:
+## 文档
 
-- `GET /api/memory`
-- `GET /api/memory/profile`
-- `GET /api/memory/assets`
-- `GET /api/memory/journal`
-- `GET /api/memory/context-preview`
+更多背景可以看：
 
-## Notes
+- [`docs/system-architecture.md`](docs/system-architecture.md)
+- [`docs/agent-interview-qa.md`](docs/agent-interview-qa.md)
+- [`docs/superpowers/specs/`](docs/superpowers/specs/)
+- [`docs/superpowers/plans/`](docs/superpowers/plans/)
 
-- Public Binance endpoints are used for current market data fetching.
-- Research flows can enrich results with CoinGecko and DefiLlama context.
-- APScheduler registers the weekly report job on backend startup.
+## License
+
+当前仓库未单独声明开源许可证。如需开源，请补充 `LICENSE`。
