@@ -51,7 +51,7 @@ class PlannerLLMService:
                 or env_values.get("OPENAI_TIMEOUT")
             )
         )
-        self.client = client or httpx.Client(timeout=float(raw_timeout) if raw_timeout else 20.0)
+        self.client = client or httpx.Client(timeout=float(raw_timeout) if raw_timeout else 60.0)
 
     def is_configured(self) -> bool:
         return bool(self.api_key and self.model)
@@ -92,8 +92,14 @@ class PlannerLLMService:
             "Only use these agents: ResearchAgent, KlineAgent, SummaryAgent. "
             "Return valid JSON with keys: mode, goal, requires_clarification, clarification_question, "
             "agents_to_invoke, inputs, reasoning_summary. "
+            "Inside inputs, extract asset, timeframes, market_type, analysis_intent, response_style when possible. "
+            "Normalize common timeframe expressions such as 1h, 4h, 1d, 1w, 15m, 30m, 小时线, 日线, 周线. "
+            "Use market_type=spot for 现货 and market_type=futures for 合约、永续、期货. "
+            "Use analysis_intent values from: trend, entry, risk_review, mixed. "
+            "Use response_style values from: analysis, investment_advice, entry_setup. "
             "If the asset or intent is ambiguous, choose clarify. "
             "If the user asks about price action, trend, timeframe, support, resistance, use kline_only. "
+            "If the user asks whether something is suitable to buy, to enter, or asks for investment advice, keep the mode aligned with the main task but set response_style accordingly. "
             "If the user asks about fundamentals, catalysts, risks, tokenomics, use research_only. "
             "If the user asks for both, use mixed_analysis."
         )

@@ -236,31 +236,191 @@ export type TracePayload = {
   task_results?: Array<Record<string, unknown>>;
   final_answer?: string | null;
   execution_summary: Record<string, unknown> | null;
+  spans?: TraceSpan[];
+  metrics_summary?: TraceMetricsSummary | null;
+  tool_usage_summary?: ToolUsageSummary | null;
+  llm_call_count?: number | null;
+  tool_call_count?: number | null;
+  failure_count?: number | null;
   events: PlannerEvent[];
   readable_workflow?: ReadableWorkflow | null;
 };
 
-export type ReadableWorkflowStage = {
-  kind: "planner" | "research" | "kline" | "summary" | "unknown";
+export type TraceMetricsSummary = {
+  prompt_tokens: number;
+  completion_tokens: number;
+  total_tokens: number;
+  input_bytes: number;
+  output_bytes: number;
+};
+
+export type ToolUsageSummary = {
+  total_calls: number;
+  failed_calls: number;
+  degraded_calls: number;
+};
+
+export type TraceSpanMetrics = Partial<TraceMetricsSummary>;
+
+export type TraceSpanAudit = {
+  actor?: string | null;
+  audit_level?: string | null;
+  replay_mode?: string | null;
+};
+
+export type TraceSpan = {
+  span_id: string;
+  parent_span_id?: string | null;
+  trace_id?: string;
+  kind: string;
+  name: string;
+  status: string;
+  start_ts: string;
+  end_ts?: string | null;
+  duration_ms?: number | null;
+  input_summary: Record<string, unknown>;
+  output_summary: Record<string, unknown>;
+  error?: string | null;
+  attributes: Record<string, unknown>;
+  metrics: TraceSpanMetrics;
+  audit: TraceSpanAudit;
+};
+
+export type TraceDetailTabs = {
+  input: Record<string, unknown>;
+  output: Record<string, unknown>;
+  error: Record<string, unknown>;
+  audit: Record<string, unknown>;
+};
+
+export type TraceTimelineNode = {
+  span_id: string;
+  parent_span_id?: string | null;
+  kind: string;
+  name: string;
+  status: string;
   title: string;
-  status: "success" | "insufficient" | "failed" | "skipped" | "unknown";
-  did: string[];
-  actual_calls: string[];
-  found: string[];
-  conclusion: string[];
-  meta: Record<string, unknown>;
+  summary: string;
+  start_ts?: string | null;
+  end_ts?: string | null;
+  duration_ms?: number | null;
+  metrics?: TraceSpanMetrics | null;
+  detail_tabs?: TraceDetailTabs | null;
+};
+
+export type ReadableWorkflowOverview = {
+  trace_status: string;
+  total_tokens: number;
+  llm_calls: number;
+  tool_calls: number;
+  failures: number;
+  total_duration_ms?: number | null;
+};
+
+export type TraceAuditCallbackSummary = {
+  started_count?: number | null;
+  completed_count?: number | null;
+  failed_count?: number | null;
+  first_token_latency_ms_avg?: number | null;
+  finish_reasons?: string[] | null;
+};
+
+export type TraceAuditSummary = {
+  trace_status: string;
+  started_at?: string | null;
+  ended_at?: string | null;
+  duration_ms?: number | null;
+  prompt_tokens?: number | null;
+  completion_tokens?: number | null;
+  total_tokens?: number | null;
+  llm_calls?: number | null;
+  tool_calls?: number | null;
+  failed_calls?: number | null;
+  degraded_calls?: number | null;
+  failures?: number | null;
+  models_used?: string[] | null;
+  providers_used?: string[] | null;
+  fallback_used?: boolean | null;
+  first_failed_span_id?: string | null;
+  first_failed_step_id?: string | null;
+  callback_summary?: TraceAuditCallbackSummary | null;
+};
+
+export type ReadableWorkflowMeta = {
+  first_failed_span_id?: string | null;
+  first_failed_step_id?: string | null;
+  timeline_count?: number | null;
+};
+
+export type ReadableWorkflowConclusion = {
+  status: string;
+  final_answer?: string | null;
+  summary?: string | null;
+  evidence_sufficient?: boolean | null;
+  missing_information: string[];
+  degraded_reason?: string | null;
+};
+
+export type TraceConclusion = {
+  conclusion_id: string;
+  kind: string;
+  text: string;
+  status: string;
+  summary?: string | null;
+  missing_information?: string[] | null;
+  evidence_ids?: string[] | null;
+  derived_from_step_ids?: string[] | null;
+};
+
+export type TraceEvidenceRecord = {
+  evidence_id: string;
+  type: string;
+  title: string;
+  summary: string;
+  source_kind?: string | null;
+  source_tool?: string | null;
+  source_url?: string | null;
+  source_domain?: string | null;
+  source_span_id?: string | null;
+  captured_at?: string | null;
+  confidence?: number | null;
+  attributes?: Record<string, unknown> | null;
+};
+
+export type TraceReasoningCallback = {
+  started_at?: string | null;
+  first_token_at?: string | null;
+  completed_at?: string | null;
+  failed_at?: string | null;
+  finish_reason?: string | null;
+  error?: string | null;
+};
+
+export type TraceReasoningStep = {
+  step_id: string;
+  agent: string;
+  round_index: number;
+  decision_summary: string;
+  action?: string | null;
+  args?: Record<string, unknown> | null;
+  observation_summary?: string | null;
+  new_evidence_ids?: string[] | null;
+  status: string;
+  duration_ms?: number | null;
+  llm_span_id?: string | null;
+  tool_span_id?: string | null;
+  callback?: TraceReasoningCallback | null;
 };
 
 export type ReadableWorkflow = {
-  final_conclusion?: {
-    status: "execute" | "clarify" | "failed" | "unknown";
-    final_answer?: string | null;
-    summary?: string | null;
-    evidence_sufficient?: boolean | null;
-    missing_information: string[];
-    degraded_reason?: string | null;
-  } | null;
-  timeline: ReadableWorkflowStage[];
+  audit_summary?: TraceAuditSummary | null;
+  overview?: ReadableWorkflowOverview | null;
+  meta?: ReadableWorkflowMeta | null;
+  conclusions?: TraceConclusion[] | null;
+  evidence_records?: TraceEvidenceRecord[] | null;
+  reasoning_steps?: TraceReasoningStep[] | null;
+  final_conclusion?: ReadableWorkflowConclusion | null;
+  timeline?: TraceTimelineNode[] | null;
 };
 
 export type AnswerGenerationPayload = {
@@ -308,6 +468,11 @@ export type ConversationSendResponse = {
 };
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
+
+function describeFetchError(path: string, error: unknown): Error {
+  const detail = error instanceof Error ? error.message : String(error);
+  return new Error(`request failed for ${path} via ${API_BASE}: ${detail}`);
+}
 
 async function getJson<T>(path: string, fallback: T): Promise<T> {
   try {
@@ -480,15 +645,19 @@ export function fetchLiveAsset(
 }
 
 async function postJson<T>(path: string, payload: unknown): Promise<T> {
-  const response = await fetch(`${API_BASE}${path}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  if (!response.ok) {
-    throw new Error(`request failed for ${path}`);
+  try {
+    const response = await fetch(`${API_BASE}${path}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      throw new Error(`http ${response.status}`);
+    }
+    return (await response.json()) as T;
+  } catch (error) {
+    throw describeFetchError(path, error);
   }
-  return (await response.json()) as T;
 }
 
 export function addWatchlistItem(input: WatchlistAddInput): Promise<Watchlist> {
@@ -530,4 +699,28 @@ export function sendConversationMessage(
   content: string,
 ): Promise<ConversationSendResponse> {
   return postJson(`/api/conversations/${conversationId}/messages`, { content });
+}
+
+export type McpToolSchema = {
+  name: string;
+  description: string;
+  inputSchema: {
+    type: string;
+    properties: Record<string, { type: string; description?: string; default?: unknown }>;
+    required?: string[];
+  };
+};
+
+export type McpServer = {
+  name: string;
+  description: string;
+  tools: McpToolSchema[];
+};
+
+export type McpServerList = {
+  servers: McpServer[];
+};
+
+export function fetchMcpServers(): Promise<McpServerList> {
+  return getJson("/api/mcp/servers", { servers: [] });
 }

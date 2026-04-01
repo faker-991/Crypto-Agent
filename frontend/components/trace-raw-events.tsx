@@ -5,7 +5,10 @@ import type { PlannerEvent } from "../lib/api";
 export function TraceRawEvents({ events }: { events: PlannerEvent[] }) {
   return (
     <details className="rounded-[1.5rem] border border-black/10 bg-white/70 p-5 shadow-sm">
-      <summary className="cursor-pointer text-sm font-semibold text-black">原始轨迹</summary>
+      <summary className="cursor-pointer text-sm font-semibold text-black">
+        原始事件
+        <span className="ml-2 text-xs font-normal uppercase tracking-[0.18em] text-black/45">{events.length} items</span>
+      </summary>
       <div className="mt-4 space-y-3">
         {events.length ? (
           events.map((event, index) => (

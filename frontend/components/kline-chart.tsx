@@ -1,6 +1,12 @@
 "use client";
 
-import { createChart, ColorType, CrosshairMode } from "lightweight-charts";
+import {
+  createChart,
+  ColorType,
+  CrosshairMode,
+  TickMarkType,
+  type Time,
+} from "lightweight-charts";
 import { useEffect, useRef } from "react";
 
 import type { Candle } from "../lib/api";
@@ -14,6 +20,38 @@ type KlineChartProps = {
   statusLabel?: string;
   emptyLabel?: string;
 };
+
+const SHANGHAI_TIME_ZONE = "Asia/Shanghai";
+const DATE_TIME_FORMATTER = new Intl.DateTimeFormat("zh-CN", {
+  timeZone: SHANGHAI_TIME_ZONE,
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false,
+});
+const DATE_FORMATTER = new Intl.DateTimeFormat("zh-CN", {
+  timeZone: SHANGHAI_TIME_ZONE,
+  month: "2-digit",
+  day: "2-digit",
+});
+const TIME_FORMATTER = new Intl.DateTimeFormat("zh-CN", {
+  timeZone: SHANGHAI_TIME_ZONE,
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false,
+});
+
+function normalizeCandles(candles: Candle[]) {
+  return Array.from(
+    candles.reduce((map, candle) => {
+      map.set(candle.open_time, candle);
+      return map;
+    }, new Map<number, Candle>()),
+  )
+    .map(([, candle]) => candle)
+    .sort((left, right) => left.open_time - right.open_time);
+}
 
 function toSeriesData(candles: Candle[]) {
   return candles.map((candle) => ({
@@ -36,6 +74,41 @@ function buildMovingAverage(candles: Candle[], period: number) {
   });
 }
 
+function toDate(time: Time): Date | null {
+  if (typeof time === "number") {
+    return new Date(time * 1000);
+  }
+  if (typeof time === "string") {
+    return new Date(`${time}T00:00:00Z`);
+  }
+  if (time && typeof time === "object" && "year" in time && "month" in time && "day" in time) {
+    return new Date(Date.UTC(time.year, time.month - 1, time.day));
+  }
+  return null;
+}
+
+function formatTickMark(time: Time, tickMarkType: TickMarkType, locale: string): string {
+  const date = toDate(time);
+  if (!date) {
+    return "";
+  }
+
+  if (tickMarkType === TickMarkType.Time || tickMarkType === TickMarkType.TimeWithSeconds) {
+    return TIME_FORMATTER.format(date);
+  }
+
+  if (tickMarkType === TickMarkType.DayOfMonth) {
+    return DATE_FORMATTER.format(date);
+  }
+
+  return new Intl.DateTimeFormat(locale || "zh-CN", {
+    timeZone: SHANGHAI_TIME_ZONE,
+    year: tickMarkType === TickMarkType.Year ? "numeric" : undefined,
+    month: "2-digit",
+    day: tickMarkType === TickMarkType.Month ? undefined : "2-digit",
+  }).format(date);
+}
+
 export function KlineChart({
   candles,
   supportLevels = [],
@@ -46,9 +119,10 @@ export function KlineChart({
   emptyLabel = "等待 K 线数据。",
 }: KlineChartProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const normalizedCandles = normalizeCandles(candles);
 
   useEffect(() => {
-    if (!containerRef.current || candles.length === 0) {
+    if (!containerRef.current || normalizedCandles.length === 0) {
       return;
     }
 
@@ -58,6 +132,13 @@ export function KlineChart({
         background: { type: ColorType.Solid, color: "transparent" },
         textColor: "rgba(255,255,255,0.72)",
         attributionLogo: false,
+      },
+      localization: {
+        locale: "zh-CN",
+        timeFormatter: (time: Time) => {
+          const date = toDate(time);
+          return date ? DATE_TIME_FORMATTER.format(date) : "";
+        },
       },
       grid: {
         vertLines: { color: "rgba(255,255,255,0.06)" },
@@ -80,6 +161,8 @@ export function KlineChart({
       timeScale: {
         borderColor: "rgba(255,255,255,0.08)",
         timeVisible: true,
+        secondsVisible: false,
+        tickMarkFormatter: formatTickMark,
       },
       handleScroll: true,
       handleScale: true,
@@ -95,7 +178,7 @@ export function KlineChart({
       lastValueVisible: true,
     });
 
-    series.setData(toSeriesData(candles));
+    series.setData(toSeriesData(normalizedCandles));
 
     const ma20Series = chart.addLineSeries({
       color: "#f6df8b",
@@ -103,7 +186,7 @@ export function KlineChart({
       lastValueVisible: false,
       priceLineVisible: false,
     });
-    ma20Series.setData(buildMovingAverage(candles, 20));
+    ma20Series.setData(buildMovingAverage(normalizedCandles, 20));
 
     const ma60Series = chart.addLineSeries({
       color: "#8fd3c1",
@@ -111,7 +194,7 @@ export function KlineChart({
       lastValueVisible: false,
       priceLineVisible: false,
     });
-    ma60Series.setData(buildMovingAverage(candles, 60));
+    ma60Series.setData(buildMovingAverage(normalizedCandles, 60));
 
     const ma120Series = chart.addLineSeries({
       color: "#ff9b85",
@@ -119,7 +202,7 @@ export function KlineChart({
       lastValueVisible: false,
       priceLineVisible: false,
     });
-    ma120Series.setData(buildMovingAverage(candles, 120));
+    ma120Series.setData(buildMovingAverage(normalizedCandles, 120));
 
     for (const level of supportLevels) {
       series.createPriceLine({
@@ -148,9 +231,9 @@ export function KlineChart({
     return () => {
       chart.remove();
     };
-  }, [candles, resistanceLevels, supportLevels]);
+  }, [normalizedCandles, resistanceLevels, supportLevels]);
 
-  if (candles.length === 0) {
+  if (normalizedCandles.length === 0) {
     return (
       <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(10,14,13,0.32),rgba(10,14,13,0.12))] px-5 py-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(243,193,94,0.16),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(143,211,193,0.12),transparent_28%)]" />

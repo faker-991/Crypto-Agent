@@ -6,11 +6,13 @@ __pycache__/
 # Node / Next.js
 frontend/node_modules/
 frontend/.next/
+frontend/.next.bak*/
 frontend/.next.stale*/
 frontend/tsconfig.tsbuildinfo
 
 # Environment files
 backend/.env
+backend/.venv/
 frontend/.env.local
 frontend/.env*.local
 

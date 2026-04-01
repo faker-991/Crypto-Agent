@@ -148,3 +148,31 @@ def test_planner_llm_service_is_not_configured_without_credentials(tmp_path: Pat
 
     assert service.is_configured() is False
     assert service.plan(_build_context("看下 BTC")) is None
+
+
+def test_planner_llm_service_prompt_requests_semantic_slots() -> None:
+    service = PlannerLLMService(
+        api_key="test-key",
+        model="test-model",
+        base_url="https://example.com/v1",
+        client=FakeClient(FakeResponse({"choices": [{"message": {"content": ""}}]})),
+    )
+
+    prompt = service._system_prompt()
+
+    assert "analysis_intent" in prompt
+    assert "response_style" in prompt
+    assert "1h" in prompt
+    assert "小时线" in prompt
+
+
+def test_planner_llm_service_defaults_to_longer_timeout(monkeypatch) -> None:
+    monkeypatch.delenv("PLANNER_LLM_TIMEOUT", raising=False)
+    monkeypatch.delenv("OPENAI_TIMEOUT", raising=False)
+    monkeypatch.setenv("OPENAI_API_KEY", "env-key")
+    monkeypatch.setenv("OPENAI_MODEL", "kimi/kimi-k2.5")
+
+    service = PlannerLLMService()
+
+    assert service.client.timeout.connect == 60.0
+    assert service.client.timeout.read == 60.0

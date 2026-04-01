@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 from app.agents.kline_agent import KlineAgent
 from app.schemas.kline import Candle, EndpointSummary, MarketDataPayload
@@ -13,6 +14,30 @@ class FakeMarketDataService:
     def get_klines(self, symbol: str, timeframe: str, market_type: str) -> MarketDataPayload:
         self.calls.append({"symbol": symbol, "timeframe": timeframe, "market_type": market_type})
         return self.payloads[timeframe]
+
+
+class StubRemoteKlineLLMClient:
+    def __init__(self, responses: list[str] | None = None, *, should_raise: bool = False) -> None:
+        self.responses = list(responses or [])
+        self.should_raise = should_raise
+        self.model = "remote-kline-model"
+        self.provider = "openai-compatible"
+        self.temperature = 0.1
+
+    def complete(self, *args, **kwargs):
+        if self.should_raise:
+            raise RuntimeError("remote llm unavailable")
+        content = self.responses.pop(0)
+        return SimpleNamespace(
+            content=content,
+            text=content,
+            message=SimpleNamespace(content=content),
+            choices=[SimpleNamespace(message=SimpleNamespace(content=content))],
+            model=self.model,
+            provider=self.provider,
+            temperature=self.temperature,
+            usage=SimpleNamespace(prompt_tokens=10, completion_tokens=7, total_tokens=17),
+        )
 
 
 def _build_payload(
@@ -78,10 +103,10 @@ def test_kline_scorecard_writes_asset_files(tmp_path: Path) -> None:
     assert isinstance(result["summary"], str)
     assert result["status"] == "success"
     assert result["evidence_sufficient"] is True
-    assert result["rounds_used"] == 2
+    assert result["rounds_used"] == len(result["agent_loop"])
     assert len(result["tool_calls"]) == 4
-    assert result["tool_calls"][0]["tool"] == "get_klines"
-    assert result["tool_calls"][1]["tool"] == "compute_indicators"
+    assert [item["tool"] for item in result["tool_calls"][:2]] == ["get_klines", "get_klines"]
+    assert [item["tool"] for item in result["tool_calls"][2:]] == ["compute_indicators", "compute_indicators"]
     assert "BTC" in result["summary"]
     assert "1d" in result["summary"]
     assert "1w" in result["summary"]
@@ -226,3 +251,42 @@ def test_kline_scorecard_keeps_existing_memory_fields(tmp_path: Path) -> None:
     assert metadata["kline_analysis"]["focus"] == ["trend"]
     assert metadata["kline_analysis"]["provenance"]["1d"]["source"] == "binance"
     assert result["previous_memory"]["symbol"] == "ETH"
+
+
+def test_kline_scorecard_prefers_remote_llm_when_available(tmp_path: Path) -> None:
+    agent = KlineAgent(
+        memory_root=tmp_path,
+        market_data_service=FakeMarketDataService({"1w": _build_payload("1w")}),
+        llm_client=StubRemoteKlineLLMClient(
+            responses=[
+                '{"decision_summary":"Inspect weekly first.","action":"get_klines","args":{"symbol":"BTC","timeframe":"1w","market_type":"spot"},"termination":false,"termination_reason":null}',
+                '{"decision_summary":"Compute indicators now.","action":"compute_indicators","args":{"timeframe":"1w"},"termination":false,"termination_reason":null}',
+                '{"decision_summary":"Enough evidence.","action":null,"args":{},"termination":true,"termination_reason":"done"}',
+            ]
+        ),
+    )
+
+    result = agent.execute(
+        skill="kline_scorecard",
+        payload={"asset": "BTC", "timeframes": ["1w"], "market_type": "spot"},
+    )
+
+    assert result["agent_loop"][0]["action"]["tool"] == "get_klines"
+    assert result["agent_loop"][0]["action"]["input"]["timeframe"] == "1w"
+    assert result["agent_loop"][1]["action"]["tool"] == "compute_indicators"
+
+
+def test_kline_scorecard_falls_back_to_heuristic_when_remote_llm_fails(tmp_path: Path) -> None:
+    agent = KlineAgent(
+        memory_root=tmp_path,
+        market_data_service=FakeMarketDataService({"1d": _build_payload("1d")}),
+        llm_client=StubRemoteKlineLLMClient(should_raise=True),
+    )
+
+    result = agent.execute(
+        skill="kline_scorecard",
+        payload={"asset": "BTC", "timeframes": ["1d"], "market_type": "spot"},
+    )
+
+    assert result["agent_loop"][0]["action"]["tool"] == "get_klines"
+    assert result["agent_loop"][0]["action"]["input"]["timeframe"] == "1d"

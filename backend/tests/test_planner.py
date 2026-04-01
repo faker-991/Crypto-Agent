@@ -162,6 +162,53 @@ def test_planner_uses_llm_decision_when_available() -> None:
     assert plan.tasks[1].task_type == "summary"
 
 
+def test_planner_preserves_semantic_llm_timeframes_and_response_style() -> None:
+    context = _build_context("帮我看下 BTC 现货的1h线、4h线，然后给出投资建议")
+    llm_service = StubPlannerLLMService(
+        PlannerDecision(
+            mode="kline_only",
+            goal="Analyze BTC spot on 1h and 4h and provide a practical investment view.",
+            requires_clarification=False,
+            clarification_question=None,
+            agents_to_invoke=["KlineAgent", "SummaryAgent"],
+            inputs={
+                "asset": "BTC",
+                "timeframes": ["1h", "4h"],
+                "market_type": "spot",
+                "analysis_intent": "entry",
+                "response_style": "investment_advice",
+            },
+            reasoning_summary="The user asked for multi-timeframe chart analysis and actionable guidance.",
+        )
+    )
+
+    plan = Planner(llm_service=llm_service).plan(context)
+
+    assert plan.tasks[0].slots["timeframes"] == ["1h", "4h"]
+    assert plan.planner_inputs["timeframes"] == ["1h", "4h"]
+    assert plan.planner_inputs["response_style"] == "investment_advice"
+    assert plan.planner_inputs["analysis_intent"] == "entry"
+
+
+def test_planner_only_uses_fallback_timeframes_when_llm_timeframes_are_missing() -> None:
+    context = _build_context("帮我看下 BTC 现货的1h线、4h线")
+    llm_service = StubPlannerLLMService(
+        PlannerDecision(
+            mode="kline_only",
+            goal="Analyze BTC spot structure.",
+            requires_clarification=False,
+            clarification_question=None,
+            agents_to_invoke=["KlineAgent", "SummaryAgent"],
+            inputs={"asset": "BTC", "market_type": "spot"},
+            reasoning_summary="The user asked for chart analysis.",
+        )
+    )
+
+    plan = Planner(llm_service=llm_service).plan(context)
+
+    assert plan.tasks[0].slots["timeframes"] == ["1h", "4h"]
+
+
 def test_planner_overrides_llm_asset_when_query_mentions_explicit_asset() -> None:
     context = _build_context("帮我看下 BTC 日线走势", current_asset="ETH")
     llm_service = StubPlannerLLMService(
@@ -193,3 +240,66 @@ def test_planner_falls_back_to_safe_rules_when_llm_returns_none() -> None:
     assert len(plan.tasks) == 2
     assert plan.tasks[0].task_type == "research"
     assert plan.tasks[1].task_type == "summary"
+
+
+def test_planner_fallback_extracts_intraday_timeframes() -> None:
+    context = _build_context("帮我看下 BTC 小时线、15m 和 30m")
+    llm_service = StubPlannerLLMService(None)
+
+    plan = Planner(llm_service=llm_service).plan(context)
+
+    assert plan.decision_mode == "kline_only"
+    assert plan.tasks[0].slots["timeframes"] == ["15m", "30m", "1h"]
+
+
+def test_planner_retains_semantic_fields_when_llm_timeframes_are_missing() -> None:
+    context = _build_context("帮我看下 BTC 现货的1h线、4h线，然后给出投资建议")
+    llm_service = StubPlannerLLMService(
+        PlannerDecision(
+            mode="kline_only",
+            goal="Analyze BTC spot structure.",
+            requires_clarification=False,
+            clarification_question=None,
+            agents_to_invoke=["KlineAgent", "SummaryAgent"],
+            inputs={
+                "asset": "BTC",
+                "market_type": "spot",
+                "analysis_intent": "entry",
+                "response_style": "investment_advice",
+            },
+            reasoning_summary="The user asked for chart analysis.",
+        )
+    )
+
+    plan = Planner(llm_service=llm_service).plan(context)
+
+    assert plan.tasks[0].slots["timeframes"] == ["1h", "4h"]
+    assert plan.planner_inputs["response_style"] == "investment_advice"
+    assert plan.planner_inputs["analysis_intent"] == "entry"
+
+
+def test_planner_merges_explicit_timeframes_when_llm_partially_omits_them_for_mixed_analysis() -> None:
+    context = _build_context("帮我研究一下BTC最近的走势，结合日线、4小时线1小时线和市场上的舆情简单分析")
+    llm_service = StubPlannerLLMService(
+        PlannerDecision(
+            mode="mixed_analysis",
+            goal="Analyze BTC across market and research angles.",
+            requires_clarification=False,
+            clarification_question=None,
+            agents_to_invoke=["ResearchAgent", "KlineAgent", "SummaryAgent"],
+            inputs={
+                "asset": "BTC",
+                "timeframes": ["1d"],
+                "market_type": "spot",
+                "analysis_intent": "mixed",
+                "response_style": "analysis",
+            },
+            reasoning_summary="The user asked for both market and research analysis.",
+        )
+    )
+
+    plan = Planner(llm_service=llm_service).plan(context)
+
+    assert plan.decision_mode == "mixed_analysis"
+    assert plan.tasks[1].slots["timeframes"] == ["1d", "1h", "4h"]
+    assert plan.planner_inputs["timeframes"] == ["1d", "1h", "4h"]

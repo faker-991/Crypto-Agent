@@ -1,5 +1,7 @@
 import re
+from typing import Any
 
+from app.orchestrator.planner_normalizer import normalize_inputs
 from app.schemas.agentic_plan import PlannerDecision
 from app.schemas.plan import Plan
 from app.schemas.planning_context import PlanningContext
@@ -15,11 +17,25 @@ class Planner:
         self.llm_service = llm_service or PlannerLLMService()
 
     def plan(self, context: PlanningContext) -> Plan:
-        llm_decision = self.llm_service.plan(context) if self.llm_service.is_configured() else None
+        fallback_reason = "not_configured"
+        llm_decision = None
+        if self.llm_service.is_configured():
+            llm_decision = self.llm_service.plan(context)
+            fallback_reason = "llm_returned_none"
         if llm_decision is not None:
-            return self._build_plan_from_decision(context, llm_decision, planner_source="llm")
+            return self._build_plan_from_decision(
+                context,
+                llm_decision,
+                planner_source="llm",
+                planner_fallback_reason=None,
+            )
         fallback_decision = self._fallback_decision(context)
-        return self._build_plan_from_decision(context, fallback_decision, planner_source="fallback")
+        return self._build_plan_from_decision(
+            context,
+            fallback_decision,
+            planner_source="fallback",
+            planner_fallback_reason=fallback_reason,
+        )
 
     def extract_explicit_asset(self, query: str) -> str | None:
         return self._extract_asset(query)
@@ -97,15 +113,21 @@ class Planner:
         decision: PlannerDecision,
         *,
         planner_source: str,
+        planner_fallback_reason: str | None,
     ) -> Plan:
+        normalized_inputs = normalize_inputs(decision.inputs if isinstance(decision.inputs, dict) else None)
         explicit_asset = self._extract_asset(context.user_request.raw_query)
-        decision_asset = decision.inputs.get("asset") if isinstance(decision.inputs, dict) else None
+        decision_asset = normalized_inputs.get("asset")
         asset = explicit_asset or decision_asset or context.session_context.current_asset
-        timeframes = decision.inputs.get("timeframes") if isinstance(decision.inputs, dict) else None
+        explicit_timeframes = self._extract_timeframes(context.user_request.raw_query)
+        timeframes = normalized_inputs.get("timeframes")
         if not isinstance(timeframes, list) or not timeframes:
-            timeframes = self._extract_timeframes(context.user_request.raw_query) or context.session_context.last_timeframes or ["1d"]
-        market_type = decision.inputs.get("market_type") if isinstance(decision.inputs, dict) else None
+            timeframes = explicit_timeframes or context.session_context.last_timeframes or ["1d"]
+        else:
+            timeframes = self._merge_timeframes(timeframes, explicit_timeframes)
+        market_type = normalized_inputs.get("market_type")
         market_type = market_type or "spot"
+        research_focus = self._extract_research_focus(context.user_request.raw_query, normalized_inputs)
 
         if decision.mode == "clarify" or decision.requires_clarification:
             return Plan(
@@ -116,8 +138,9 @@ class Planner:
                 clarification_question=decision.clarification_question or "可以再具体一点吗？",
                 reasoning_summary=decision.reasoning_summary,
                 agents_to_invoke=decision.agents_to_invoke or ["SummaryAgent"],
-                planner_inputs=decision.inputs,
+                planner_inputs=normalized_inputs,
                 planner_source=planner_source,
+                planner_fallback_reason=planner_fallback_reason,
                 tasks=[],
             )
 
@@ -128,14 +151,15 @@ class Planner:
                 decision_mode="research_only",
                 reasoning_summary=decision.reasoning_summary,
                 agents_to_invoke=decision.agents_to_invoke or ["ResearchAgent", "SummaryAgent"],
-                planner_inputs={**decision.inputs, "asset": asset},
+                planner_inputs={**normalized_inputs, "asset": asset},
                 planner_source=planner_source,
+                planner_fallback_reason=planner_fallback_reason,
                 tasks=[
                     Task(
                         task_id="task-research",
                         task_type="research",
                         title=f"Research {asset}",
-                        slots={"asset": asset},
+                        slots={"asset": asset, "focus": research_focus},
                     ),
                     Task(
                         task_id="task-summary",
@@ -154,8 +178,9 @@ class Planner:
                 decision_mode="kline_only",
                 reasoning_summary=decision.reasoning_summary,
                 agents_to_invoke=decision.agents_to_invoke or ["KlineAgent", "SummaryAgent"],
-                planner_inputs={**decision.inputs, "asset": asset, "timeframes": timeframes, "market_type": market_type},
+                planner_inputs={**normalized_inputs, "asset": asset, "timeframes": timeframes, "market_type": market_type},
                 planner_source=planner_source,
+                planner_fallback_reason=planner_fallback_reason,
                 tasks=[
                     Task(
                         task_id="task-kline",
@@ -180,14 +205,15 @@ class Planner:
                 decision_mode="mixed_analysis",
                 reasoning_summary=decision.reasoning_summary,
                 agents_to_invoke=decision.agents_to_invoke or ["ResearchAgent", "KlineAgent", "SummaryAgent"],
-                planner_inputs={**decision.inputs, "asset": asset, "timeframes": timeframes, "market_type": market_type},
+                planner_inputs={**normalized_inputs, "asset": asset, "timeframes": timeframes, "market_type": market_type},
                 planner_source=planner_source,
+                planner_fallback_reason=planner_fallback_reason,
                 tasks=[
                     Task(
                         task_id="task-research",
                         task_type="research",
                         title=f"Research {asset}",
-                        slots={"asset": asset},
+                        slots={"asset": asset, "focus": research_focus},
                     ),
                     Task(
                         task_id="task-kline",
@@ -216,6 +242,7 @@ class Planner:
                 reasoning_summary="The planner decision did not include enough structured inputs to execute safely.",
             ),
             planner_source=planner_source,
+            planner_fallback_reason=planner_fallback_reason,
         )
 
     def _extract_asset(self, query: str) -> str | None:
@@ -225,19 +252,35 @@ class Planner:
     def _extract_timeframes(self, query: str) -> list[str]:
         timeframes: list[str] = []
         lowered = query.lower()
+        if "15m" in lowered:
+            timeframes.append("15m")
+        if "30m" in lowered:
+            timeframes.append("30m")
+        if "1h" in lowered or "小时线" in query:
+            timeframes.append("1h")
         if "周线" in query:
             timeframes.append("1w")
         if "日线" in query:
             timeframes.append("1d")
-        if "4h" in lowered:
+        if "4h" in lowered or "4小时线" in query or "四小时线" in query:
             timeframes.append("4h")
         return timeframes
+
+    def _merge_timeframes(self, semantic_timeframes: list[str], explicit_timeframes: list[str]) -> list[str]:
+        merged: list[str] = []
+        seen: set[str] = set()
+        for timeframe in [*semantic_timeframes, *explicit_timeframes]:
+            if not isinstance(timeframe, str) or not timeframe or timeframe in seen:
+                continue
+            seen.add(timeframe)
+            merged.append(timeframe)
+        return merged
 
     def _is_kline_query(self, query: str, request_type: str) -> bool:
         lowered = query.lower()
         return request_type == "follow_up" or any(
             token in lowered
-            for token in ("k线", "走势", "周线", "日线", "4h", "趋势", "现价", "价格", "现货", "入手")
+            for token in ("k线", "走势", "周线", "日线", "小时线", "1h", "4h", "15m", "30m", "趋势", "现价", "价格", "现货", "入手")
         )
 
     def _is_research_query(self, query: str, request_type: str) -> bool:
@@ -246,3 +289,25 @@ class Planner:
             token in lowered
             for token in ("基本面", "研究", "值不值得", "尽调", "长期")
         )
+
+    def _extract_research_focus(self, query: str, normalized_inputs: dict[str, Any]) -> list[str]:
+        lowered = query.lower()
+        focus: list[str] = []
+        if any(token in query for token in ("舆情", "情绪", "新闻")) or any(
+            token in lowered for token in ("sentiment", "news", "websearch")
+        ):
+            focus.extend(["sentiment", "news"])
+        if any(token in query for token in ("走势", "趋势", "日线", "周线", "小时线")) or any(
+            token in lowered for token in ("1h", "4h", "1d", "1w", "trend", "price")
+        ):
+            focus.append("trend")
+        if normalized_inputs.get("analysis_intent") == "entry":
+            focus.append("entry")
+        deduped: list[str] = []
+        seen: set[str] = set()
+        for item in focus:
+            if item in seen:
+                continue
+            seen.add(item)
+            deduped.append(item)
+        return deduped

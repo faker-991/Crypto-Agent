@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
+      <body suppressHydrationWarning>
         <div className="mx-auto min-h-screen max-w-6xl px-6 py-10">
           <header className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -21,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/">Dashboard</Link>
               <Link href="/assets/BTC">Asset</Link>
               <Link href="/traces">Traces</Link>
+              <Link href="/tools">Tools</Link>
             </nav>
           </header>
           {children}

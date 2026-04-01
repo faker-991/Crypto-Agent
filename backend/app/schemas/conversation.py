@@ -14,6 +14,9 @@ class AnswerGenerationResult(BaseModel):
     answer_text: str | None = None
     error: str | None = None
     used_context: list[str] = Field(default_factory=list)
+    prompt_tokens: int | None = None
+    completion_tokens: int | None = None
+    total_tokens: int | None = None
 
 
 class ConversationMessage(BaseModel):

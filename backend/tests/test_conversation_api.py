@@ -14,17 +14,19 @@ from app.services.trace_log_service import TraceLogService
 
 
 class StubAnswerAdapter:
+    model = "stub-answer-model"
+
     def is_configured(self) -> bool:
         return True
 
-    def generate_answer(self, *, prompt: dict) -> str | None:
+    def generate_answer(self, *, prompt: dict) -> tuple[str | None, dict]:
         execution_summary = prompt.get("execution_summary") or {}
         asset = (
             execution_summary.get("market_summary", {}).get("asset")
             or execution_summary.get("asset")
             or "asset"
         )
-        return f"{asset} natural answer"
+        return f"{asset} natural answer", {"prompt_tokens": 21, "completion_tokens": 9, "total_tokens": 30}
 
 
 class StubOrchestratorService:
@@ -130,3 +132,7 @@ def test_conversation_api_records_answer_generation_trace_event(tmp_path: Path) 
 
     assert any(event["name"] == "answer_generation.started" for event in trace_payload["events"])
     assert any(event["name"] == "answer_generation.completed" for event in trace_payload["events"])
+    answer_span = next(span for span in trace_payload["spans"] if span["kind"] == "llm" and span["name"] == "answer_generation")
+    assert answer_span["status"] == "success"
+    assert answer_span["metrics"]["total_tokens"] == 30
+    assert trace_payload["metrics_summary"]["total_tokens"] >= 30

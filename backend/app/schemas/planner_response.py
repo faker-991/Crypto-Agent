@@ -6,7 +6,7 @@ from app.schemas.plan import Plan
 from app.schemas.task_result import TaskResult
 
 
-PlannerExecutionStatus = Literal["execute", "clarify", "failed"]
+PlannerExecutionStatus = Literal["execute", "clarify", "failed", "partial_failure"]
 
 
 class PlannerExecutionResponse(BaseModel):

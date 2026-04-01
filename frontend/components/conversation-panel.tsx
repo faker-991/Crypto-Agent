@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Link from "next/link";
 
 import type { ConversationTranscript } from "../lib/api";
@@ -79,7 +80,11 @@ function ChatBubble({ message }: { message: ConversationTranscript["messages"][n
         <p className={`text-[11px] uppercase tracking-[0.24em] ${isUser ? "text-black/48" : "text-white/42"}`}>
           {isUser ? "用户" : "助手"}
         </p>
-        <p className={`mt-3 text-sm leading-7 ${isUser ? "text-black/78" : "text-white/82"}`}>{message.content}</p>
+        {isUser ? (
+          <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-black/78">{message.content}</p>
+        ) : (
+          <div className="mt-3">{renderAssistantMessage(message.content)}</div>
+        )}
 
         {!isUser ? (
           <div className="mt-4 space-y-4">
@@ -111,6 +116,7 @@ function ChatBubble({ message }: { message: ConversationTranscript["messages"][n
               <Link
                 className="inline-flex rounded-full border border-white/10 bg-white/8 px-4 py-2 text-xs uppercase tracking-[0.2em] text-white/72 transition hover:bg-white/14"
                 href={`/traces?trace=${traceId}`}
+                scroll
               >
                 查看轨迹
               </Link>
@@ -158,4 +164,140 @@ function summarizeHighlights(execution: Record<string, unknown> | null | undefin
   }
 
   return items.slice(0, 4);
+}
+
+function renderAssistantMessage(content: string): ReactNode {
+  const blocks = splitMessageBlocks(content);
+
+  return (
+    <div className="space-y-4 text-sm leading-7 text-white/82">
+      {blocks.map((block, index) => {
+        if (block.type === "heading") {
+          return (
+            <div key={`heading-${index}`} className="space-y-2">
+              <p className="text-[11px] uppercase tracking-[0.24em] text-amber-200/70">{block.levelLabel}</p>
+              <h4 className="text-base font-semibold text-white">{renderInline(block.text)}</h4>
+            </div>
+          );
+        }
+        if (block.type === "list") {
+          return (
+            <ul key={`list-${index}`} className="space-y-2 rounded-[1.1rem] border border-white/8 bg-black/10 px-4 py-3">
+              {block.items.map((item, itemIndex) => (
+                <li key={`item-${itemIndex}`} className="flex gap-3 text-white/80">
+                  <span className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-amber-200/80" />
+                  <span>{renderInline(item)}</span>
+                </li>
+              ))}
+            </ul>
+          );
+        }
+        return (
+          <p key={`paragraph-${index}`} className="whitespace-pre-wrap text-white/82">
+            {renderInline(block.text)}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
+function splitMessageBlocks(content: string): Array<
+  | { type: "heading"; text: string; levelLabel: string }
+  | { type: "paragraph"; text: string }
+  | { type: "list"; items: string[] }
+> {
+  const normalized = content.replace(/\r\n/g, "\n").trim();
+  if (!normalized) {
+    return [{ type: "paragraph", text: "" }];
+  }
+
+  const lines = normalized.split("\n");
+  const blocks: Array<
+    | { type: "heading"; text: string; levelLabel: string }
+    | { type: "paragraph"; text: string }
+    | { type: "list"; items: string[] }
+  > = [];
+
+  let paragraphBuffer: string[] = [];
+  let listBuffer: string[] = [];
+
+  const flushParagraph = () => {
+    if (!paragraphBuffer.length) {
+      return;
+    }
+    blocks.push({ type: "paragraph", text: paragraphBuffer.join("\n").trim() });
+    paragraphBuffer = [];
+  };
+
+  const flushList = () => {
+    if (!listBuffer.length) {
+      return;
+    }
+    blocks.push({ type: "list", items: listBuffer });
+    listBuffer = [];
+  };
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) {
+      flushParagraph();
+      flushList();
+      continue;
+    }
+    const headingMatch = line.match(/^(#{1,6})\s+(.+)$/);
+    if (headingMatch) {
+      flushParagraph();
+      flushList();
+      blocks.push({
+        type: "heading",
+        text: headingMatch[2].trim(),
+        levelLabel: `章节 ${headingMatch[1].length}`,
+      });
+      continue;
+    }
+    const listMatch = line.match(/^[-*•]\s+(.+)$/);
+    if (listMatch) {
+      flushParagraph();
+      listBuffer.push(listMatch[1].trim());
+      continue;
+    }
+    flushList();
+    paragraphBuffer.push(line);
+  }
+
+  flushParagraph();
+  flushList();
+  return blocks;
+}
+
+function renderInline(text: string): ReactNode {
+  const nodes: ReactNode[] = [];
+  const pattern = /\*\*(.+?)\*\*/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  match = pattern.exec(text);
+  while (match) {
+    if (match.index > lastIndex) {
+      nodes.push(text.slice(lastIndex, match.index));
+    }
+    nodes.push(
+      <strong key={`strong-${match.index}`} className="font-semibold text-white">
+        {match[1]}
+      </strong>,
+    );
+    lastIndex = match.index + match[0].length;
+    match = pattern.exec(text);
+  }
+
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
+  }
+
+  if (!nodes.length) {
+    return text;
+  }
+
+  return <>{nodes}</>;
 }

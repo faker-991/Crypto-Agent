@@ -4,7 +4,7 @@ from pathlib import Path
 from app.services.context_assembly_service import ContextAssemblyService
 
 
-def test_build_router_context_includes_session_and_profile(tmp_path: Path) -> None:
+def test_build_planner_context_includes_session_and_profile(tmp_path: Path) -> None:
     (tmp_path / "session").mkdir(parents=True)
     (tmp_path / "session" / "current_session.json").write_text(
         json.dumps(
@@ -30,7 +30,7 @@ def test_build_router_context_includes_session_and_profile(tmp_path: Path) -> No
 
     service = ContextAssemblyService(tmp_path)
 
-    context = service.build_router_context("帮我看看 SUI")
+    context = service.build_planner_context("帮我看看 SUI")
 
     assert context["query"] == "帮我看看 SUI"
     assert context["session"]["current_asset"] == "SUI"

@@ -19,4 +19,5 @@ class Plan(BaseModel):
     agents_to_invoke: list[PlannerAgentName] = Field(default_factory=list)
     planner_inputs: dict[str, Any] = Field(default_factory=dict)
     planner_source: str | None = None
+    planner_fallback_reason: str | None = None
     tasks: list[Task] = Field(default_factory=list)

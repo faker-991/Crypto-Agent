@@ -3,7 +3,8 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import assets, conversations, memory, paper_trading, planner, research, trace, watchlist
+from app.api import assets, conversations, memory, mcp, paper_trading, planner, research, trace, watchlist
+from app.clients.mcp_setup import build_mcp_registry
 from app.orchestrator.orchestrator_service import OrchestratorService
 from app.services.answer_generation_service import AnswerGenerationService
 from app.services.asset_discovery_service import AssetDiscoveryService
@@ -30,7 +31,8 @@ def create_app(memory_root: Path | None = None, enable_scheduler: bool = True) -
     paper_trading_service = PaperTradingService(resolved_memory_root)
     market_data_service = MarketDataService()
     asset_discovery_service = AssetDiscoveryService(market_data_service=market_data_service)
-    orchestrator_service = OrchestratorService(resolved_memory_root)
+    mcp_registry = build_mcp_registry()
+    orchestrator_service = OrchestratorService(resolved_memory_root, mcp_registry=mcp_registry)
     trace_log_service = TraceLogService(resolved_memory_root)
     answer_generation_service = AnswerGenerationService()
     conversation_service = ConversationService(
@@ -55,6 +57,7 @@ def create_app(memory_root: Path | None = None, enable_scheduler: bool = True) -
     app.dependency_overrides[research.get_market_data_service] = lambda: market_data_service
     app.dependency_overrides[trace.get_trace_log_service] = lambda: trace_log_service
     app.dependency_overrides[conversations.get_conversation_service] = lambda: conversation_service
+    app.dependency_overrides[mcp.get_mcp_registry] = lambda: mcp_registry
 
     @app.get("/api/health")
     def healthcheck() -> dict[str, str]:
@@ -68,6 +71,7 @@ def create_app(memory_root: Path | None = None, enable_scheduler: bool = True) -
     app.include_router(research.router)
     app.include_router(trace.router)
     app.include_router(conversations.router)
+    app.include_router(mcp.router)
     return app
 
 

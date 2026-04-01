@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 from pathlib import Path
+from time import perf_counter
 from uuid import uuid4
 
 from app.orchestrator.orchestrator_service import OrchestratorService
@@ -46,12 +47,16 @@ class ConversationService:
 
         result = self.orchestrator_service.execute(user_message, conversation_id=conversation_id)
         transcript = self.conversation_memory_service.read_conversation(conversation_id)
+        answer_started_at = self._now_iso()
+        started_perf = perf_counter()
         answer_generation = self.answer_generation_service.generate(
             user_query=user_message,
             execution_summary=result.get("execution_summary"),
             recent_messages=[message.model_dump() for message in transcript.messages[-6:]],
             session_state=self.session_state_service.read_state().model_dump(),
         )
+        answer_duration_ms = max((perf_counter() - started_perf) * 1000, 0.0)
+        answer_finished_at = self._now_iso()
         trace_id = self._extract_trace_id(result.get("trace_path"))
         answer_text = answer_generation.answer_text or self._fallback_message(result)
         assistant_entry = ConversationMessage(
@@ -66,31 +71,72 @@ class ConversationService:
         )
         self.conversation_memory_service.append_messages(conversation_id, [assistant_entry])
         if result.get("trace_path"):
-            self.trace_log_service.append_events(
-                result["trace_path"],
-                [
-                    {
-                        "name": "answer_generation.started",
-                        "actor": "AnswerGenerationService",
-                        "detail": {
-                            "provider": "openai-compatible",
-                            "model": answer_generation.model,
-                            "status": "started",
-                            "used_context": ["execution", "recent_messages", "session_state"],
-                        },
+            events = [
+                {
+                    "name": "answer_generation.started",
+                    "actor": "AnswerGenerationService",
+                    "detail": {
+                        "provider": "openai-compatible",
+                        "model": answer_generation.model,
+                        "status": "started",
+                        "used_context": ["execution", "recent_messages", "session_state"],
                     },
+                },
+                {
+                    "name": "answer_generation.completed",
+                    "actor": "AnswerGenerationService",
+                    "detail": {
+                        "provider": answer_generation.provider,
+                        "model": answer_generation.model,
+                        "status": answer_generation.status,
+                        "used_context": answer_generation.used_context,
+                        "error": answer_generation.error,
+                        "prompt_tokens": answer_generation.prompt_tokens,
+                        "completion_tokens": answer_generation.completion_tokens,
+                        "total_tokens": answer_generation.total_tokens,
+                    },
+                },
+            ]
+            spans = []
+            if answer_generation.status in {"ready", "unavailable"}:
+                spans.append(
                     {
-                        "name": "answer_generation.completed",
-                        "actor": "AnswerGenerationService",
-                        "detail": {
-                            "provider": answer_generation.provider,
-                            "model": answer_generation.model,
-                            "status": answer_generation.status,
+                        "span_id": f"answer-{uuid4().hex[:8]}",
+                        "parent_span_id": None,
+                        "trace_id": trace_id or "unknown-trace",
+                        "kind": "llm",
+                        "name": "answer_generation",
+                        "status": "success" if answer_generation.status == "ready" else "failed",
+                        "start_ts": answer_started_at,
+                        "end_ts": answer_finished_at,
+                        "duration_ms": answer_duration_ms,
+                        "input_summary": {
+                            "user_query": user_message,
                             "used_context": answer_generation.used_context,
+                        },
+                        "output_summary": {
+                            "status": answer_generation.status,
+                            "answer_preview": answer_text[:240] if answer_generation.answer_text else None,
                             "error": answer_generation.error,
                         },
-                    },
-                ],
+                        "error": answer_generation.error,
+                        "attributes": {
+                            "model": answer_generation.model,
+                            "provider": answer_generation.provider,
+                            "temperature": 0.2,
+                        },
+                        "metrics": {
+                            "prompt_tokens": int(answer_generation.prompt_tokens or 0),
+                            "completion_tokens": int(answer_generation.completion_tokens or 0),
+                            "total_tokens": int(answer_generation.total_tokens or 0),
+                        },
+                        "audit": {"actor": "AnswerGenerationService"},
+                    }
+                )
+            self.trace_log_service.append_trace_data(
+                result["trace_path"],
+                events=events,
+                spans=spans,
             )
         return {
             "assistant_message": assistant_entry.model_dump(),
